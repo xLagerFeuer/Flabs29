@@ -6,7 +6,14 @@ module Cases
 // 11.
 
 let case11caseStatement langName =
-    ()
+    match langName with
+    | "F#" | "Prolog" -> printf "Подлиза"
+    | "Python" | "Rust" | "Go" -> printf "Сойбой"
+    | "Java" | "Kotlin" -> printf "Тебя к крестогосподам занесёт"
+    | "C#" -> printf "Полетайкин би лайк"
+    | "C++" -> printf "Зося би лайк"
+    | "1C" -> printf "Выскубов би лайк"
+    | _ -> printf "Хе-хе"
 
 // 12. - реализация внутри main
 
