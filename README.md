@@ -1,1 +1,1 @@
-# SMIprolog29
+# Flabs29 3 variant
