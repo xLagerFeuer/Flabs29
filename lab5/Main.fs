@@ -37,120 +37,120 @@ let rec gcd x y =
 
 // 11.
 
-//let case11caseStatement langName =
-//    printfn "11."
-//    match langName with
-//    | "F#" | "Prolog" -> printfn "Подлиза"
-//    | "Python" | "Rust" | "Go" -> printfn "Питонист"
-//    | "Java" | "Kotlin" -> printfn "Тебя к крестогосподам занесёт"
-//    | "C#" | "C++" -> printfn "Полетайкин би лайк"
-//    | _ -> printfn "Нет языка в списках"
+let case11caseStatement langName =
+    printfn "11."
+    match langName with
+    | "F#" | "Prolog" -> printfn "Подлиза"
+    | "Python" | "Rust" | "Go" -> printfn "Питонист"
+    | "Java" | "Kotlin" -> printfn "Тебя к крестогосподам занесёт"
+    | "C#" | "C++" -> printfn "Полетайкин би лайк"
+    | _ -> printfn "Нет языка в списках"
 
 // 12. - реализация внутри main
 
 // 13.
 
-//let rec multprod args = 
-//    match args with
-//    | [] -> 0
-//    | head::[] -> head
-//    | head::tail -> head * multprod tail
+let rec multprod args = 
+    match args with
+    | [] -> 0
+    | head::[] -> head
+    | head::tail -> head * multprod tail
 
-//let rec multminTC args min =
-//    match args with
-//    | head::tail when head < min -> multminTC tail head
-//    | head::tail -> multminTC tail min
-//    | [] -> min
+let rec multminTC args min =
+    match args with
+    | head::tail when head < min -> multminTC tail head
+    | head::tail -> multminTC tail min
+    | [] -> min
 
-//let multmin args =
-//    multminTC args (System.Int32.MaxValue)
+let multmin args =
+    multminTC args (System.Int32.MaxValue)
 
-//let rec multmaxTC args max =
-//    match args with
-//    | head::tail when head > max -> multmaxTC tail head
-//    | head::tail -> multmaxTC tail max
-//    | [] -> max
+let rec multmaxTC args max =
+    match args with
+    | head::tail when head > max -> multmaxTC tail head
+    | head::tail -> multmaxTC tail max
+    | [] -> max
 
-//let multmax args =
-//    multmaxTC args (System.Int32.MinValue)
+let multmax args =
+    multmaxTC args (System.Int32.MinValue)
 
-//let case13prodminmax args =
-//    printfn "13. %A" args
-//    printfn "Произведение: %A" (multprod args) // рекурсия вверх
-//    printfn "Минимальное: %A" (multmin args) // хвостовая
-//    printfn "Максимальное: %A" (multmax args) // хвостовая
+let case13prodminmax args =
+    printfn "13. %A" args
+    printfn "Произведение: %A" (multprod args) // рекурсия вверх
+    printfn "Минимальное: %A" (multmin args) // хвостовая
+    printfn "Максимальное: %A" (multmax args) // хвостовая
 
 // 14.
 
-//let isLess x y = if x < y then true else false
+let isLess x y = if x < y then true else false
 
-//let rec TC func lst min =
-//    match lst with
-//    | head1::(head2::tail) when func head1 head2 -> multminTC tail head1
-//    | head1::(head2::tail) when func head2 head1 -> multminTC tail head2
-//    | head::[] when func min head -> min
-//    | head::[] when func head min -> head
-//    | [] -> min
-//    | _ -> min
+let rec TC func lst min =
+    match lst with
+    | head1::(head2::tail) when func head1 head2 -> multminTC tail head1
+    | head1::(head2::tail) when func head2 head1 -> multminTC tail head2
+    | head::[] when func min head -> min
+    | head::[] when func head min -> head
+    | [] -> min
+    | _ -> min
 
 
-//let rec curringFunc func lst =
-//    TC func lst (System.Int32.MaxValue)
+let rec curringFunc func lst =
+    TC func lst (System.Int32.MaxValue)
     
 
-//let rec divSearchTC (iter:int) (times:int) (items:list<int>):list<int> = 
-//    match iter with
-//    | _ when iter > times -> items
-//    | _ when times % iter = 0 -> divSearchTC (iter + 1) times (iter::items)
-//    | _ -> divSearchTC (iter + 1) times items
+let rec divSearchTC (iter:int) (times:int) (items:list<int>):list<int> = 
+    match iter with
+    | _ when iter > times -> items
+    | _ when times % iter = 0 -> divSearchTC (iter + 1) times (iter::items)
+    | _ -> divSearchTC (iter + 1) times items
         
 
-//let divSearch number =
-//    divSearchTC 1 number [] // поменять 1 на 2, если нужно найти наименьшее, больше 1
+let divSearch number =
+    divSearchTC 1 number [] // поменять 1 на 2, если нужно найти наименьшее, больше 1
 
-//let numbersDivIter number func =
-//    let divs = divSearch number
-//    let min = curringFunc isLess divs
-//    divs, min
+let numbersDivIter number func =
+    let divs = divSearch number
+    let min = curringFunc isLess divs
+    divs, min
 
-//let case14divSearch number =
-//    printfn "14. Число - %A" number
-//    let divs, min = numbersDivIter number isLess
-//    printfn "Делители - %A" divs
-//    printfn "Минимальный - %A" min
+let case14divSearch number =
+    printfn "14. Число - %A" number
+    let divs, min = numbersDivIter number isLess
+    printfn "Делители - %A" divs
+    printfn "Минимальный - %A" min
 
 // 15. — с применением генератора
 // взял компоненты сложения, т.е. 3 + 2 = 5
 
 
-//let times x y = x * y
+let times x y = x * y
 
-//let numbersCoprimeIter number =
-//    let coprimes = [
-//        for i in 1 .. number/2 do
-//            if (number - i) % i <> 0
-//            then
-//                yield (i, number - i, i * (number - i))
-//    ]
+let numbersCoprimeIter number =
+    let coprimes = [
+        for i in 1 .. number/2 do
+            if (number - i) % i <> 0
+            then
+                yield (i, number - i, i * (number - i))
+    ]
 
-//    coprimes
+    coprimes
 
-//let case15coprimeNumbers number =
-//    printfn "15. Числа - %A" number
-//    let sumMapToPrimes = numbersCoprimeIter number
-//    printfn "Взаимнопростые компоненты сложения числа, их произведение - \n %A" sumMapToPrimes
+let case15coprimeNumbers number =
+    printfn "15. Числа - %A" number
+    let sumMapToPrimes = numbersCoprimeIter number
+    printfn "Взаимнопростые компоненты сложения числа, их произведение - \n %A" sumMapToPrimes
 
 
 // 16.
 
-//let case16unitTest15 =
-//    let RandomObj = System.Random()
-//    for i in 1 .. 10 do
-//        case15coprimeNumbers (RandomObj.Next 1000)
+let case16unitTest15 =
+    let RandomObj = System.Random()
+    for i in 1 .. 10 do
+        case15coprimeNumbers (RandomObj.Next 1000)
     
 
-//let case16eulerNumber (n:int) =
-//    printfn "Число эйлера — %A" (pown (1.0+(1.0/float(n))) n)
+let case16eulerNumber (n:int) =
+    printfn "Число эйлера — %A" (pown (1.0+(1.0/float(n))) n)
 
 let case16gcd x y =
     let res = gcd x y
@@ -160,34 +160,34 @@ let case16gcd x y =
 
 // 17. — need case16gcd, case14divsearch
 
-let numbersCoprimeIter number cndtn =
-    let coprimes = [
-        for i in 1 .. number/2 do
-            if (number - i) % i <> 0 && cndtn i
-            then
-                yield (i, number - i, i * (number - i))
-    ]
-    ()
+//let numbersCoprimeIter number cndtn =
+//    let coprimes = [
+//        for i in 1 .. number/2 do
+//            if (number - i) % i <> 0 && cndtn i
+//            then
+//                yield (i, number - i, i * (number - i))
+//    ]
+//    ()
 
-let rec divSearchTC (iter:int) (times:int) (items:list<int>) (cndtn:(int->bool)):list<int> = 
-    match iter with
-    | _ when iter > times -> items
-    | _ when times % iter = 0 && cndtn iter -> divSearchTC (iter + 1) times (iter::items) cndtn
-    | _ -> divSearchTC (iter + 1) times items cndtn
+//let rec divSearchlTC (iter:int) (times:int) (items:list<int>) (cndtn:(int->bool)):list<int> = 
+//    match iter with
+//    | _ when iter > times -> items
+//    | _ when times % iter = 0 && cndtn iter -> divSearchlTC (iter + 1) times (iter::items) cndtn
+//    | _ -> divSearchlTC (iter + 1) times items cndtn
         
 
-let divSearch number =
-    divSearchTC 1 number [] // поменять 1 на 2, если нужно найти наименьшее, больше 1
+//let divSearchl number =
+//    divSearchlTC 1 number [] // поменять 1 на 2, если нужно найти наименьшее, больше 1
 
-let case17divsSearch number numberCndtn = 
-    printfn "Числа — %A %A" number numberCndtn
-    let condition x = (fun y -> ((case16gcd number x) < y))
-    let cndtn = condition numberCndtn
-    let divs = divSearch number cndtn
-    let coprimes = numbersCoprimeIter number cndtn
+//let case17divsSearch number numberCndtn = 
+//    printfn "Числа — %A %A" number numberCndtn
+//    let condition x = (fun y -> ((case16gcd number x) < y))
+//    let cndtn = condition numberCndtn
+//    let divs = divSearchl number cndtn
+//    let coprimes = numbersCoprimeIter number cndtn
 
-    printfn "divs — %A" divs
-    printfn "coprimes — %A" coprimes
+//    printfn "divs — %A" divs
+//    printfn "coprimes — %A" coprimes
     
 
 // 18. Work with numbers
@@ -281,9 +281,11 @@ let case183 x =
 
 [<EntryPoint>]
 let main argv =
-    // case11caseStatement "Python"
-    // case12CaseStatement - first superpositions then carring
+    //case11caseStatement "Python"
+    //case12CaseStatement - first superpositions then carring
     
+    //12
+
     //printfn "12."
     //let func langName =
     //    match langName with
@@ -292,8 +294,6 @@ let main argv =
     //    | "Java" | "Kotlin" -> printfn "Тебя к крестогосподам занесёт"
     //    | "C#" | "C++" -> printfn "Полетайкин би лайк"
     //    | _ -> printfn "Нет языка в списках"
-
-     
 
     // superpositions — написать только оператором суперпозиции << >>
 
@@ -307,15 +307,15 @@ let main argv =
     //inputLang |> func 
 
     //
-
-    // case13prodminmax [1; 3; 2; 5; 4]
-    // case14divSearch 25
+    
+    //case13prodminmax [1; 3; 2; 5; 4]
+    //case14divSearch 25
     //case15coprimeNumbers 16
     //case16unitTest15 // test 15
     //case16eulerNumber 100
     //case16gcd 52 13
     //case17divsSearch 42 7
-    // case181 34
-    // case182 3245
-    case183 63
+    //case181 34
+    //case182 3245
+    //case183 63
     0 // return 0
