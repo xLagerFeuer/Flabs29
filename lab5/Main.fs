@@ -123,44 +123,72 @@ let rec gcd x y =
 // взял компоненты сложения, т.е. 3 + 2 = 5
 
 
-let times x y = x * y
+//let times x y = x * y
 
-let numbersCoprimeIter number =
-    let coprimes = [
-        for i in 1 .. number/2 do
-            if (number - i) % i <> 0
-            then
-                yield (i, number - i, i * (number - i))
-    ]
+//let numbersCoprimeIter number =
+//    let coprimes = [
+//        for i in 1 .. number/2 do
+//            if (number - i) % i <> 0
+//            then
+//                yield (i, number - i, i * (number - i))
+//    ]
 
-    coprimes
+//    coprimes
 
-let case15coprimeNumbers number =
-    printfn "15. Числа - %A" number
-    let sumMapToPrimes = numbersCoprimeIter number
-    printfn "Взаимнопростые компоненты сложения числа, их произведение - \n %A" sumMapToPrimes
+//let case15coprimeNumbers number =
+//    printfn "15. Числа - %A" number
+//    let sumMapToPrimes = numbersCoprimeIter number
+//    printfn "Взаимнопростые компоненты сложения числа, их произведение - \n %A" sumMapToPrimes
 
 
 // 16.
 
-let case16unitTest15 =
-    let RandomObj = System.Random()
-    for i in 1 .. 10 do
-        case15coprimeNumbers (RandomObj.Next 1000)
+//let case16unitTest15 =
+//    let RandomObj = System.Random()
+//    for i in 1 .. 10 do
+//        case15coprimeNumbers (RandomObj.Next 1000)
     
 
-let case16eulerNumber (n:int) =
-    printfn "Число эйлера — %A" (pown (1.0+(1.0/float(n))) n)
-
-
+//let case16eulerNumber (n:int) =
+//    printfn "Число эйлера — %A" (pown (1.0+(1.0/float(n))) n)
 
 let case16gcd x y =
-    gcd x y |> printfn "GCD %A"
+    let res = gcd x y
+    res |> printfn "GCD %A"
+    res
 
-// 17.
 
-let case17divsSearch = //
+// 17. — need case16gcd, case14divsearch
+
+let numbersCoprimeIter number cndtn =
+    let coprimes = [
+        for i in 1 .. number/2 do
+            if (number - i) % i <> 0 && cndtn i
+            then
+                yield (i, number - i, i * (number - i))
+    ]
     ()
+
+let rec divSearchTC (iter:int) (times:int) (items:list<int>) (cndtn:(int->bool)):list<int> = 
+    match iter with
+    | _ when iter > times -> items
+    | _ when times % iter = 0 && cndtn iter -> divSearchTC (iter + 1) times (iter::items) cndtn
+    | _ -> divSearchTC (iter + 1) times items cndtn
+        
+
+let divSearch number =
+    divSearchTC 1 number [] // поменять 1 на 2, если нужно найти наименьшее, больше 1
+
+let case17divsSearch number numberCndtn = 
+    printfn "Числа — %A %A" number numberCndtn
+    let condition x = (fun y -> ((case16gcd number x) < y))
+    let cndtn = condition numberCndtn
+    let divs = divSearch number cndtn
+    let coprimes = numbersCoprimeIter number cndtn
+
+    printfn "divs — %A" divs
+    printfn "coprimes — %A" coprimes
+    
 
 // 18. Work with numbers
 // Variant 3 — Zhdanoff Alexader
@@ -169,33 +197,24 @@ let case17divsSearch = //
 
 
 
-//let maxgcd =
-//    ()
+//2
 
-//let case181 x =
-//    let divs = [
-//        for n in 1 .. x do
-//            if x % n = 0
-//            then
-//                yield n
-//    ]
-//    let res = 
+let prodNonDiv5 = 
+    ()
 
-// 2
+let case182 =
+    ()
 
-//let prodNonDiv5 = // TODO: ???
-//    ()
+ //3
 
-//let case182 =
-//    ()
+let maxgcd =
+    ()
 
-// 3
+let maxEvenNonPrime = 
+    ()
 
-//let maxEvenNonPrime = // TODO: делитель числа, его произведения
-//    ()
-
-//let case183 =
-//    ()
+let case183 =
+    ()
 
 [<EntryPoint>]
 let main argv =
@@ -232,8 +251,8 @@ let main argv =
     //case16unitTest15 // test 15
     //case16eulerNumber 100
     //case16gcd 52 13
-    // case17divsSearch
-    // case181
-    // case182
-    // case183
+    case17divsSearch 42 7
+    //case181
+    //case182
+    //case183
     0 // return 0
