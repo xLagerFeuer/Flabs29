@@ -2,26 +2,33 @@
 
 // utils
 
-//let min x y = 
-//    if x > y then y
-//    else x
-
-//let max x y =
-//    if x 
-
-let rec readList n = 
-    if n=0 then []
+let rec forLoop body times = 
+    if times <= 0 then
+        ()
     else
-    let Head = System.Convert.ToInt32(System.Console.ReadLine())
-    let Tail = readList (n-1)
-    Head::Tail
+        body
+        forLoop body (times - 1)
+
+let rec whileLoop body predicate =
+    if predicate then
+        body
+        whileLoop body predicate
+    else
+        ()
+
+//let rec readList n = 
+//    if n=0 then []
+//    else
+//    let Head = System.Convert.ToInt32(System.Console.ReadLine())
+//    let Tail = readList (n-1)
+//    Head::Tail
 
 
-let rec opList l (f:int->int->int) : int= 
-    match l with
-    |head::[] -> head
-    |head::t -> f head (opList t f) 
-    |[] -> 0
+//let rec opList l (f:int->int->int) : int= 
+//    match l with
+//    |head::[] -> head
+//    |head::t -> f head (opList t f) 
+//    |[] -> 0
 
 // 11.
 
@@ -70,8 +77,42 @@ let case13prodminmax args =
 
 // 14.
 
-let case14divSearch =
-    ()
+let isLess x y = if x < y then true else false
+
+let rec TC func lst min =
+    match lst with
+    | head1::(head2::tail) when func head1 head2 -> multminTC tail head1
+    | head1::(head2::tail) when func head2 head1 -> multminTC tail head2
+    | head::[] when func min head -> min
+    | head::[] when func head min -> head
+    | [] -> min
+    | _ -> min
+
+
+let rec curringFunc func lst =
+    TC func lst (System.Int32.MaxValue)
+    
+
+let rec divSearchTC (iter:int) (times:int) (items:list<int>):list<int> = 
+    match iter with
+    | _ when iter > times -> items
+    | _ when times % iter = 0 -> divSearchTC (iter + 1) times (iter::items)
+    | _ -> divSearchTC (iter + 1) times items
+        
+
+let divSearch number =
+    divSearchTC 1 number [] // поменять 1 на 2, если нужно найти наименьшее, больше 1
+
+let numbersDivMap number func =
+    let divs = divSearch number
+    let min = curringFunc isLess divs
+    divs, min
+
+let case14divSearch number =
+    printfn "14. Число - %A" number
+    let divs, min = numbersDivMap number isLess
+    printfn "Делители - %A" divs
+    printfn "Минимальный - %A" min
 
 // 15.
 
@@ -126,11 +167,11 @@ let case183 =
 
 [<EntryPoint>]
 let main argv =
-    case11caseStatement "Python"
+    // case11caseStatement "Python"
     
     // case12CaseStatement - first superpositions then carring
     
-    let inputLang = "Prolog"
+    // let inputLang = "Prolog"
 
     // superpositions — написать только оператором суперпозиции << >>
 
@@ -148,8 +189,7 @@ let main argv =
     //
 
     // case13prodminmax [1; 3; 2; 5; 4]
-    // case13prodTailCall
-    // case14divSearch
+    case14divSearch 25
     // case15coprimeNumbers
     // case16eulerNumber
     // case16gcd
