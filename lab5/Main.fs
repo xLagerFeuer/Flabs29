@@ -16,6 +16,11 @@ let rec whileLoop body predicate =
     else
         ()
 
+let rec gcd x y =
+    if y = 0 then x
+    else gcd y (x % y)
+
+
 //let rec readList n = 
 //    if n=0 then []
 //    else
@@ -103,21 +108,47 @@ let rec divSearchTC (iter:int) (times:int) (items:list<int>):list<int> =
 let divSearch number =
     divSearchTC 1 number [] // поменять 1 на 2, если нужно найти наименьшее, больше 1
 
-let numbersDivMap number func =
+let numbersDivIter number func =
     let divs = divSearch number
     let min = curringFunc isLess divs
     divs, min
 
 let case14divSearch number =
     printfn "14. Число - %A" number
-    let divs, min = numbersDivMap number isLess
+    let divs, min = numbersDivIter number isLess
     printfn "Делители - %A" divs
     printfn "Минимальный - %A" min
 
-// 15.
+// 15. — с применением генератора
+// взял компоненты сложения, т.е. 3 + 2 = 5
 
-let case15coprimeNumbers X func initY = // declare types defination
-    ()
+
+//let times x y = x * y
+
+//let summatorTC lst acc =
+//    match lst with
+//    | x::(y::tail) ->
+    // pass
+
+//let summator lst =
+//    summatorTC lst 1
+
+//let numbersCoprimeIter componentable y sum =
+//    let coprimes = [
+//        for i in 1 .. number/2 do
+//            if (number - i) % i = 0
+//            then
+//                yield (i, number - i)
+//    ]
+//    let sum = summator coprimes
+
+//    coprime, sum
+
+//let case15coprimeNumbers X Y =
+//    printfn "15. Числа - %A" X Y
+//    let sumMapToPrimes = numbersCoprimeIter X Y times
+//    printfn "Взаимнопростые компоненты сложения числа, их произведение - %A" sumMapToPrimes
+
 
 // 16.
 
@@ -140,56 +171,67 @@ let case17divsSearch = //
 
 // 1
 
-let maxgcd =
-    ()
 
-let case181 =
-    ()
+
+//let maxgcd =
+//    ()
+
+//let case181 x =
+//    let divs = [
+//        for n in 1 .. x do
+//            if x % n = 0
+//            then
+//                yield n
+//    ]
+//    let res = 
 
 // 2
 
-let prodNonDiv5 = // TODO: ???
-    ()
+//let prodNonDiv5 = // TODO: ???
+//    ()
 
-let case182 =
-    ()
+//let case182 =
+//    ()
 
 // 3
 
-let gcd =
-    ()
+//let maxEvenNonPrime = // TODO: делитель числа, его произведения
+//    ()
 
-let maxEvenNonPrime = // TODO: делитель числа, его произведения
-    ()
-
-let case183 =
-    ()
+//let case183 =
+//    ()
 
 [<EntryPoint>]
 let main argv =
     // case11caseStatement "Python"
-    
     // case12CaseStatement - first superpositions then carring
     
-    // let inputLang = "Prolog"
+    printfn "12."
+    let func langName =
+        match langName with
+        | "F#" | "Prolog" -> printfn "Подлиза"
+        | "Python" | "Rust" | "Go" -> printfn "Питонист"
+        | "Java" | "Kotlin" -> printfn "Тебя к крестогосподам занесёт"
+        | "C#" | "C++" -> printfn "Полетайкин би лайк"
+        | _ -> printfn "Нет языка в списках"
+
+     
 
     // superpositions — написать только оператором суперпозиции << >>
 
-    //compare inputLang
-    //<< functional << "Подлиза"
-    //<< newest << "Питонист"
-    //<< jvm << "Тебя к крестогосподам занесёт"
-    //<< C << "Полетайкин би лайк"
-    //>> voidDestructor
+    //let inputLang X = (if X=1 then "F#" else "Python")
+    //let newfunc = inputLang >> func
+    //newfunc 1
 
     // carring — написать только оператором каррирования <| |>
 
-
+    //let inputLang = "Prolog"
+    //inputLang |> func 
 
     //
 
     // case13prodminmax [1; 3; 2; 5; 4]
-    case14divSearch 25
+    // case14divSearch 25
     // case15coprimeNumbers
     // case16eulerNumber
     // case16gcd
