@@ -143,6 +143,19 @@ let case15coprimeNumbers number =
 
 // 16.
 
+let case16unitTest15 =
+    let RandomObj = System.Random()
+    for i in 1 .. 10 do
+        case15coprimeNumbers (RandomObj.Next 1000)
+    
+
+let case16eulerNumber (n:int) =
+    printfn "Число эйлера — %A" (pown (1.0+(1.0/float(n))) n)
+
+
+
+let case16gcd x y =
+    gcd x y |> printfn "GCD %A"
 
 // 17.
 
