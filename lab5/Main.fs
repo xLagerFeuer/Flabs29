@@ -26,41 +26,47 @@ let rec opList l (f:int->int->int) : int=
 // 11.
 
 let case11caseStatement langName =
+    printfn "11."
     match langName with
-    | "F#" | "Prolog" -> printf "Подлиза"
-    | "Python" | "Rust" | "Go" -> printf "Сойбой"
-    | "Java" | "Kotlin" -> printf "Тебя к крестогосподам занесёт"
-    | "C#" -> printf "Полетайкин би лайк"
-    | "C++" -> printf "Зося би лайк"
-    | "1C" -> printf "Выскубов би лайк"
-    | _ -> printf "Хе-хе"
+    | "F#" | "Prolog" -> printfn "Подлиза"
+    | "Python" | "Rust" | "Go" -> printfn "Питонист"
+    | "Java" | "Kotlin" -> printfn "Тебя к крестогосподам занесёт"
+    | "C#" | "C++" -> printfn "Полетайкин би лайк"
+    | _ -> printfn "Нет языка в списках"
 
 // 12. - реализация внутри main
 
 // 13.
 
-let rec multprod args:list<int> ?prod=0 = 
+let rec multprod args = 
     match args with
-    | 
-    | 
     | [] -> 0
-
-let rec multmin args =
-    match args with
     | head::[] -> head
-    | head::tail -> multmin(head multmin(tail))
-    | [] -> []
+    | head::tail -> head * multprod tail
 
-let rec multmax args:list<int> =
+let rec multminTC args min =
     match args with
-    |
-    |
-    | [] -> 0
+    | head::tail when head < min -> multminTC tail head
+    | head::tail -> multminTC tail min
+    | [] -> min
+
+let multmin args =
+    multminTC args (System.Int32.MaxValue)
+
+let rec multmaxTC args max =
+    match args with
+    | head::tail when head > max -> multmaxTC tail head
+    | head::tail -> multmaxTC tail max
+    | [] -> max
+
+let multmax args =
+    multmaxTC args (System.Int32.MinValue)
 
 let case13prodminmax args =
-    printf "Произведение: %f" (multprod args) // рекурсия снизу вверх
-    printf "Минимальное: %f" (multmin args) // хвостовая
-    printf "Максимальное: %f" (multmax args) // хвостовая
+    printfn "13. %A" args
+    printfn "Произведение: %A" (multprod args) // рекурсия вверх
+    printfn "Минимальное: %A" (multmin args) // хвостовая
+    printfn "Максимальное: %A" (multmax args) // хвостовая
 
 // 14.
 
@@ -124,11 +130,24 @@ let main argv =
     
     // case12CaseStatement - first superpositions then carring
     
-        // гег
+    let inputLang = "Prolog"
+
+    // superpositions — написать только оператором суперпозиции << >>
+
+    //compare inputLang
+    //<< functional << "Подлиза"
+    //<< newest << "Питонист"
+    //<< jvm << "Тебя к крестогосподам занесёт"
+    //<< C << "Полетайкин би лайк"
+    //>> voidDestructor
+
+    // carring — написать только оператором каррирования <| |>
+
+
 
     //
 
-    case13prodminmax [1 3 2 5 4]
+    // case13prodminmax [1; 3; 2; 5; 4]
     // case13prodTailCall
     // case14divSearch
     // case15coprimeNumbers
