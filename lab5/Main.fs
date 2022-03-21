@@ -193,28 +193,91 @@ let case17divsSearch number numberCndtn =
 // 18. Work with numbers
 // Variant 3 — Zhdanoff Alexader
 
+let isdiv num x = if num % x = 0 then true else false
+
 // 1
 
+let rec isprime number index =
+    if index >= number then true
+    else
+        if (number % index <> 0)
+        then isprime number (index+1)
+        else false
 
+let rec getmaxPrimeAndDivTC number index max =
+    if index > number then max
+    else
+        if (isprime index 2) && (isdiv number index)
+        then
+            getmaxPrimeAndDivTC number (index+1) index
+        else
+            getmaxPrimeAndDivTC number (index+1) max
+
+let getmaxPrimeAndDiv number =
+    getmaxPrimeAndDivTC number 2 1
+
+let case181 x =
+    printfn "18.1 x = %A" x
+    let max = getmaxPrimeAndDiv x
+    printfn "max = %A" max
 
 //2
 
-let prodNonDiv5 = 
-    ()
+let isNotDiv5 x = if (x % 5 <> 0) then true else false
 
-let case182 =
-    ()
+let rec prodNonDiv5TC num prod =
+    if num = 0 then prod
+    else
+        let digit = num % 10
+        if isNotDiv5 digit
+        then prodNonDiv5TC (num/10) (prod*digit)
+        else prodNonDiv5TC (num/10) prod
 
- //3
+let prodNonDiv5 x = 
+    prodNonDiv5TC x 1
+    
 
-let maxgcd =
-    ()
+let case182 x =
+    printfn "Произведение цифр числа - %A" (prodNonDiv5 x)
 
-let maxEvenNonPrime = 
-    ()
+//3
 
-let case183 =
-    ()
+let rec prodTC num prod =
+    if num = 0 then prod
+    else
+        let digit = num % 10
+        prodTC (num/10) (prod*digit)
+
+let prod x = 
+    prodTC x 1
+//
+
+let isnondiv2 x = if (x % 2 <> 0) then true else false
+
+let rec isnonprime number index =
+    if index >= number then false
+    else
+        if (number % index = 0)
+        then true
+        else isnonprime number (index+1)
+
+let rec getmaxNonPrimeAndNonDiv2TC number index max =
+    if index > number then max
+    else
+        if (isnonprime index 2) && (isnondiv2 index) && (isdiv number index)
+        then
+            getmaxNonPrimeAndNonDiv2TC number (index+1) index
+        else
+            getmaxNonPrimeAndNonDiv2TC number (index+1) max
+
+let getmaxNonPrimeAndNonDiv2 number =
+    getmaxNonPrimeAndNonDiv2TC number 2 1
+
+let case183 x =
+    printfn "Число — %A" x
+    let X = getmaxNonPrimeAndNonDiv2 x
+    let Y = prod x
+    printfn "GCD %A и %A - %A" X Y (gcd x Y)
 
 [<EntryPoint>]
 let main argv =
@@ -251,8 +314,8 @@ let main argv =
     //case16unitTest15 // test 15
     //case16eulerNumber 100
     //case16gcd 52 13
-    case17divsSearch 42 7
-    //case181
-    //case182
-    //case183
+    //case17divsSearch 42 7
+    // case181 34
+    // case182 3245
+    case183 63
     0 // return 0
