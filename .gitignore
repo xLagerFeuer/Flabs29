@@ -7,3 +7,13 @@
 /lab5/bin/Debug/netcoreapp3.1
 /ConsoleApplication22
 /ЛР5_5
+/ConsoleApplication23
+/lab05/bin/Debug/netcoreapp3.1
+/lab05/obj
+/lab06/bin/Debug
+/lab06/obj
+*.config
+*.fs
+*.user
+/packages/System.ValueTuple.4.3.1
+/lab07/obj
