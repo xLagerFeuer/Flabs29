@@ -119,15 +119,15 @@ let ident x = x
 //    0
 
 
-// task15
+//// task15
 
-let task15 (lst:int list) n =
-    let rec isLocalMin lst n =
-        match lst with
-        | head::pnt::tail when n = 1 -> if head > pnt && pnt < tail.Head then true else false
-        | head::tail -> isLocalMin tail (n-1)
-    if n = 0 && lst.Head < lst.Tail.Head then true
-    else isLocalMin lst n
+//let task15 (lst:int list) n =
+//    let rec isLocalMin lst n =
+//        match lst with
+//        | head::pnt::tail when n = 1 -> if head > pnt && pnt < tail.Head then true else false
+//        | head::tail -> isLocalMin tail (n-1)
+//    if n = 0 && lst.Head < lst.Tail.Head then true
+//    else isLocalMin lst n
     
 
 //// по определению, локальный минимум x - x: существует E>0 f(x-E) > f(x), f(x+E) > f(x) => localmin [5,1,2,0] = 1
@@ -141,15 +141,15 @@ let task15 (lst:int list) n =
 
 //// task27
 
-//let task27 lst =
-//    let circularShiftLeft (lst:int list) = lst.Tail @ (lst.Head)::[]
-//    circularShiftLeft lst
+let task27 lst =
+    let circularShiftLeft (lst:int list) = lst.Tail @ (lst.Head)::[]
+    circularShiftLeft lst
 
-//[<EntryPoint>]
-//let main argv = 
-//    let lst = [for i in 1..20 do yield i]
-//    printfn "%A" (task27 lst)
-//    0
+[<EntryPoint>]
+let main argv = 
+    let lst = [for i in 1..20 do yield i]
+    printfn "%A" (task27 lst)
+    0
 
 //// task30
 
@@ -177,7 +177,7 @@ let task15 (lst:int list) n =
 //        | even1::odd::tail -> 
 //            printf "%A " even1
 //            outEven tail
-//            outOdd <| odd::tail
+//        | [] -> ()
 //        | even -> 
 //            printf "%A " even
 //            ()
@@ -186,24 +186,45 @@ let task15 (lst:int list) n =
 //        | odd1::even::tail -> 
 //            printf "%A " odd1
 //            outOdd tail
-//        | odd ->
-//            printf "%A " odd
+//        | head::[] -> 
+//            printf "%A " head
 //            ()
+        
 //    outEven lst
+//    outOdd lst.Tail
 
 //[<EntryPoint>]
 //let main argv = 
-//    let arr = [5; 3; 2; 7; 9; 1; 16; 25]
+//    let arr = [for i in 1..20 do yield i]
 //    printfn "%A" <| task39 arr
 //    0
 
-//// task45
+// task45
 
-//let task45 array seq =
+//let rec accCond lst (cond:int->bool) func acc =
+//    match lst with
+//    | head::tail when cond head -> accCond tail cond func (func acc head)
+//    | head::tail -> accCond tail cond func acc
+//    | _ -> acc
 
+//let isStoredInSeq seq elem :bool =
+//    let mutable itContains = false
+//    for iter in seq do
+//        // отвратительная реализация if-then, т.к. if-then без else невозможен по документации.
+//        // реализации прохода последовательности через рекурсии нет, только через методы класса, которые по условию задачи запрещены.
+//        if iter = elem then
+//            itContains <- true
+//    itContains
+
+//let task45 lst interval =
+//    accCond lst (isStoredInSeq interval) (fun x y -> x + y) 0
+            
 //[<EntryPoint>]
 //let main argv = 
-//    printfn "%A" argv
+//    let interval = seq {25..35}
+//    printfn "%A" interval
+//    let array = [25; 9; 3; 33; 52]
+//    task45 array interval |> printfn "%A"
 //    0
 
 //// task51
@@ -212,5 +233,6 @@ let task15 (lst:int list) n =
 
 //[<EntryPoint>]
 //let main argv = 
-//    printfn "%A" argv
+//    let lst = [3; 5; 3; 2; 1; 4; 5]
+//    printfn "%A" (task51 lst)
 //    0
