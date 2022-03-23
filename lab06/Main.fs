@@ -153,51 +153,51 @@ let ident x = x
 
 //// task30
 
-let task30 (lst:int list) n =
-    let rec isLocalMax lst n =
-        match lst with
-        | head::pnt::tail when n = 1 -> if head < pnt && pnt > tail.Head then true else false
-        | head::tail -> isLocalMax tail (n-1)
-    if n = 0 && lst.Head > lst.Tail.Head then true
-    else isLocalMax lst n
-
-// локальный максимум
-[<EntryPoint>]
-let main argv = 
-    let arr = [5; 3; 2; 7; 9; 1; 16; 25] 
-    let n = 5
-    printfn "%A" (task30 arr n)
-    0
-
-//// task39
-
-//let task39 lst =
-//    let rec outEven lst =
+//let task30 (lst:int list) n =
+//    let rec isLocalMax lst n =
 //        match lst with
-//        | even1::odd::tail -> 
-//            printf "%A " even1
-//            outEven tail
-//        | [] -> ()
-//        | even -> 
-//            printf "%A " even
-//            ()
-//    and outOdd lst  =
-//        match lst with
-//        | odd1::even::tail -> 
-//            printf "%A " odd1
-//            outOdd tail
-//        | head::[] -> 
-//            printf "%A " head
-//            ()
-        
-//    outEven lst
-//    outOdd lst.Tail
+//        | head::pnt::tail when n = 1 -> if head < pnt && pnt > tail.Head then true else false
+//        | head::tail -> isLocalMax tail (n-1)
+//    if n = 0 && lst.Head > lst.Tail.Head then true
+//    else isLocalMax lst n
 
+//// локальный максимум
 //[<EntryPoint>]
 //let main argv = 
-//    let arr = [for i in 1..20 do yield i]
-//    printfn "%A" <| task39 arr
+//    let arr = [5; 3; 2; 7; 9; 1; 16; 25] 
+//    let n = 5
+//    printfn "%A" (task30 arr n)
 //    0
+
+// task39
+
+let task39 lst =
+    let rec outEven lst =
+        match lst with
+        | even1::odd::tail -> 
+            printf "%A " even1
+            outEven tail
+        | [] -> ()
+        | even -> 
+            printf "%A " even
+            ()
+    and outOdd lst  =
+        match lst with
+        | odd1::even::tail -> 
+            printf "%A " odd1
+            outOdd tail
+        | head::[] -> 
+            printf "%A " head
+            ()
+        
+    outEven lst
+    outOdd lst.Tail
+
+[<EntryPoint>]
+let main argv = 
+    let arr = [for i in 1..20 do yield i]
+    printfn "%A" <| task39 arr
+    0
 
 // task45
 
