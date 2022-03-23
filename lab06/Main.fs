@@ -71,53 +71,52 @@ let ident x = x
 
 //// task11
 
-let union x y = if x && y then true else false
+//let union x y = if x && y then true else false
 
-let findAnother (lst:int list) =
-    let rec getDiff lst diff =
-        match lst with
-        | head::tail when head = diff -> getDiff tail diff
-        | x::y::tail ->
-            if diff = x then y else x
-    getDiff lst.Tail lst.Head
+//let findAnother (lst:int list) =
+//    let rec getDiff lst diff =
+//        match lst with
+//        | head::tail when head = diff -> getDiff tail diff
+//        | x::y::tail ->
+//            if diff = x then y else x
+//    getDiff lst.Tail lst.Head
 
-let task11 array =
-    findAnother array
-
-[<EntryPoint>]
-let main argv = 
-    let array = [5; 5; 4; 5; 5; 5; 5] 
-    printfn "%A" (task11 array)
-    0
-
-//// task13
-
-//let isEqual x y = fun x -> if y = x then true else false
-
-//let rec findMinTC lst min =
-//    match lst with
-//    | head::tail when head < min -> findMinTC tail head
-//    | head::tail -> findMinTC tail min
-//    | _ -> min
-    
-//let rec rawListTC lst cndtn =
-//    match lst with
-//    | head::tail when cndtn head -> head::tail
-//    | head::tail -> (rawListTC tail cndtn)::head
-
-
-//let shiftToMin array =
-//    let min = findMinTC array (Int32.MaxValue)
-//    rawListTC lst (isEqual <| min)
-
-//let task13 array =
-//    shiftToMin array
+//let task11 array =
+//    findAnother array
 
 //[<EntryPoint>]
 //let main argv = 
-//    let array = [5; 5; 4; 2; 1; 13; 8; 5] 
-//    printfn "%A" (task 13 array)
+//    let array = [5; 5; 4; 5; 5; 5; 5] 
+//    printfn "%A" (task11 array)
 //    0
+
+//// task13
+
+let isEqual x = fun y -> if x = y then true else false
+
+let shiftToMin array =
+    let rec findMin lst min =
+        match lst with
+        | head::tail when head < min -> findMin tail head
+        | head::tail -> findMin tail min
+        | _ -> min
+        
+    let rec rawList lstL lstR cndtn =
+        match lstL with
+        | head::tail when cndtn head -> lstL @ lstR
+        | head::tail -> rawList tail (lstR @ head::[]) cndtn
+
+    let min = findMin array (Int32.MaxValue)
+    rawList array [] (isEqual min)
+
+let task13 array =
+    shiftToMin array
+
+[<EntryPoint>]
+let main argv = 
+    let array = [5; 5; 4; 2; 1; 13; 8; 5] 
+    printfn "%A" (task13 array)
+    0
 
 
 //// task15
