@@ -141,33 +141,33 @@ let ident x = x
 
 //// task27
 
-let task27 lst =
-    let circularShiftLeft (lst:int list) = lst.Tail @ (lst.Head)::[]
-    circularShiftLeft lst
+//let task27 lst =
+//    let circularShiftLeft (lst:int list) = lst.Tail @ (lst.Head)::[]
+//    circularShiftLeft lst
 
-[<EntryPoint>]
-let main argv = 
-    let lst = [for i in 1..20 do yield i]
-    printfn "%A" (task27 lst)
-    0
+//[<EntryPoint>]
+//let main argv = 
+//    let lst = [for i in 1..20 do yield i]
+//    printfn "%A" (task27 lst)
+//    0
 
 //// task30
 
-//let task30 (lst:int list) n =
-//    let rec isLocalMax lst n =
-//        match lst with
-//        | head::pnt::tail when n = 1 -> if head < pnt && pnt > tail.Head then true else false
-//        | head::tail -> isLocalMax tail (n-1)
-//    if n = 0 && lst.Head > lst.Tail.Head then true
-//    else isLocalMax lst n
+let task30 (lst:int list) n =
+    let rec isLocalMax lst n =
+        match lst with
+        | head::pnt::tail when n = 1 -> if head < pnt && pnt > tail.Head then true else false
+        | head::tail -> isLocalMax tail (n-1)
+    if n = 0 && lst.Head > lst.Tail.Head then true
+    else isLocalMax lst n
 
-//// локальный максимум
-//[<EntryPoint>]
-//let main argv = 
-//    let arr = [5; 3; 2; 7; 9; 1; 16; 25] 
-//    let n = 5
-//    printfn "%A" (task30 arr n)
-//    0
+// локальный максимум
+[<EntryPoint>]
+let main argv = 
+    let arr = [5; 3; 2; 7; 9; 1; 16; 25] 
+    let n = 5
+    printfn "%A" (task30 arr n)
+    0
 
 //// task39
 
@@ -210,7 +210,7 @@ let main argv =
 //let isStoredInSeq seq elem :bool =
 //    let mutable itContains = false
 //    for iter in seq do
-//        // отвратительная реализация if-then, т.к. if-then без else невозможен по документации.
+//        // отвратительная реализация if-then, т.к. буливое возвращение if-then без else невозможен по документации.
 //        // реализации прохода последовательности через рекурсии нет, только через методы класса, которые по условию задачи запрещены.
 //        if iter = elem then
 //            itContains <- true
@@ -229,10 +229,43 @@ let main argv =
 
 //// task51
 
+//let returnIndex lst elem =
+//    let rec indexTC lst elem ind = 
+//        match lst with
+//        | head::tail when head = elem -> ind
+//        | head::tail -> indexTC tail elem (ind+1)
+//    indexTC lst elem 0
+
+//let rec incelem lst n =
+//    match lst with
+//    | head::tail when n = 0 -> (head+1)::tail
+//    | head::tail -> head::(incelem tail (n-1))
+
+//let rec contains elem lst = 
+//    match lst with
+//    | head::tail when elem = head -> true
+//    | head::tail -> contains elem tail
+//    | _ -> false
+
 //let task51 lst =
+//    let rec getUniq lst uniq =
+//        match lst with
+//        | head::tail when uniq |> (contains head) -> getUniq tail uniq
+//        | head::tail -> getUniq tail (head::uniq)
+//        | _ -> uniq
+//    let rec getFrequency lst uniq freq =
+//        match lst with
+//        | head::tail -> returnIndex uniq head |> incelem freq |> getFrequency tail uniq
+//        | _ -> freq
+
+//    let uniqList = getUniq lst []
+//    let accFrequency = [for i in 1..uniqList.Length do yield 0]
+
+//    (uniqList, getFrequency lst uniqList accFrequency)
 
 //[<EntryPoint>]
 //let main argv = 
-//    let lst = [3; 5; 3; 2; 1; 4; 5]
-//    printfn "%A" (task51 lst)
+//    //let lst = [2; 5; 4; 5; 0; 15; 1]
+//    let lst = [2;5;4;3;2]
+//    printfn "Uniqal and their Frequence — %A" (task51 lst)
 //    0
