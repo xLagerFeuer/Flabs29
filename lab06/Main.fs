@@ -92,67 +92,109 @@ let ident x = x
 
 //// task13
 
-let isEqual x = fun y -> if x = y then true else false
+//let isEqual x = fun y -> if x = y then true else false
 
-let shiftToMin array =
-    let rec findMin lst min =
-        match lst with
-        | head::tail when head < min -> findMin tail head
-        | head::tail -> findMin tail min
-        | _ -> min
+//let shiftToMin array =
+//    let rec findMin lst min =
+//        match lst with
+//        | head::tail when head < min -> findMin tail head
+//        | head::tail -> findMin tail min
+//        | _ -> min
         
-    let rec rawList lstL lstR cndtn =
-        match lstL with
-        | head::tail when cndtn head -> lstL @ lstR
-        | head::tail -> rawList tail (lstR @ head::[]) cndtn
+//    let rec rawList lstL lstR cndtn =
+//        match lstL with
+//        | head::tail when cndtn head -> lstL @ lstR
+//        | head::tail -> rawList tail (lstR @ head::[]) cndtn
 
-    let min = findMin array (Int32.MaxValue)
-    rawList array [] (isEqual min)
+//    let min = findMin array (Int32.MaxValue)
+//    rawList array [] (isEqual min)
 
-let task13 array =
-    shiftToMin array
-
-[<EntryPoint>]
-let main argv = 
-    let array = [5; 5; 4; 2; 1; 13; 8; 5] 
-    printfn "%A" (task13 array)
-    0
-
-
-//// task15
-
-//let task15 array n =
+//let task13 array =
+//    shiftToMin array
 
 //[<EntryPoint>]
 //let main argv = 
-//    printfn "%A" argv
+//    let array = [5; 5; 4; 2; 1; 13; 8; 5] 
+//    printfn "%A" (task13 array)
+//    0
+
+
+// task15
+
+let task15 (lst:int list) n =
+    let rec isLocalMin lst n =
+        match lst with
+        | head::pnt::tail when n = 1 -> if head > pnt && pnt < tail.Head then true else false
+        | head::tail -> isLocalMin tail (n-1)
+    if n = 0 && lst.Head < lst.Tail.Head then true
+    else isLocalMin lst n
+    
+
+//// по определению, локальный минимум x - x: существует E>0 f(x-E) > f(x), f(x+E) > f(x) => localmin [5,1,2,0] = 1
+//// индексация с нуля
+//[<EntryPoint>]
+//let main argv =
+//    let arr = [5; 3; 2; 7; 9; 1; 16; 25] 
+//    let n = 2
+//    printfn "%A" (task15 arr n)
 //    0
 
 //// task27
 
-//let task27 array =
+//let task27 lst =
+//    let circularShiftLeft (lst:int list) = lst.Tail @ (lst.Head)::[]
+//    circularShiftLeft lst
 
 //[<EntryPoint>]
 //let main argv = 
-//    printfn "%A" argv
+//    let lst = [for i in 1..20 do yield i]
+//    printfn "%A" (task27 lst)
 //    0
 
 //// task30
 
-//let task30 array n =
+//let task30 (lst:int list) n =
+//    let rec isLocalMax lst n =
+//        match lst with
+//        | head::pnt::tail when n = 1 -> if head < pnt && pnt > tail.Head then true else false
+//        | head::tail -> isLocalMax tail (n-1)
+//    if n = 0 && lst.Head > lst.Tail.Head then true
+//    else isLocalMax lst n
 
+//// локальный максимум
 //[<EntryPoint>]
 //let main argv = 
-//    printfn "%A" argv
+//    let arr = [5; 3; 2; 7; 9; 1; 16; 25] 
+//    let n = 5
+//    printfn "%A" (task30 arr n)
 //    0
 
 //// task39
 
-//let task39 array =
+//let task39 lst =
+//    let rec outEven lst =
+//        match lst with
+//        | even1::odd::tail -> 
+//            printf "%A " even1
+//            outEven tail
+//            outOdd <| odd::tail
+//        | even -> 
+//            printf "%A " even
+//            ()
+//    and outOdd lst  =
+//        match lst with
+//        | odd1::even::tail -> 
+//            printf "%A " odd1
+//            outOdd tail
+//        | odd ->
+//            printf "%A " odd
+//            ()
+//    outEven lst
 
 //[<EntryPoint>]
 //let main argv = 
-//    printfn "%A" argv
+//    let arr = [5; 3; 2; 7; 9; 1; 16; 25]
+//    printfn "%A" <| task39 arr
 //    0
 
 //// task45
