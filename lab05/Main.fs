@@ -368,22 +368,22 @@ let rec gcd x y =
 
 //// 20
 
-let matchwithfunc = function
-    | 1 -> solve181
-    | 2 -> solve182
-    | 3 -> solve183
+//let matchwithfunc = function
+//    | 1 -> solve181
+//    | 2 -> solve182
+//    | 3 -> solve183
 
 
-let task20 (ind, x) =
+//let task20 (ind, x) =
     
-    printfn "Число — %A" x
-    printfn "Номер функции — %A" ind
+//    printfn "Число — %A" x
+//    printfn "Номер функции — %A" ind
 
-    //curring implementation
-    x |> (ind |> matchwithfunc)
-    //superpositions implementation
-    let ident x = x
-    (matchwithfunc << ident) ind x
+//    //curring implementation
+//    x |> (ind |> matchwithfunc)
+//    //superpositions implementation
+//    let ident x = x
+//    (matchwithfunc << ident) ind x
     
 
 [<EntryPoint>]
@@ -425,5 +425,5 @@ let main argv =
     //case181 34
     //case182 3245
     //case183 63
-    task20 (1, 34)
+    //task20 (1, 34)
     0 // return 0

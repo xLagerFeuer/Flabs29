@@ -3,7 +3,17 @@
 ################################################################################
 
 /.vs
+/other
 /lab5/obj
-/lab5/bin/Debug/netcoreapp3.1
-/ConsoleApplication22
-/ЛР5_5
+/lab5/bin
+/lab05/bin
+/lab05/obj
+/lab06/bin
+/lab06/obj
+/lab07/obj
+
+*.config
+*.fs
+*.user
+
+/packages
