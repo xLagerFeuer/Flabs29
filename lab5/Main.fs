@@ -280,92 +280,111 @@ let rec gcd x y =
 
 //// 19 — модификация 18 до pure function's
 
-let isdiv num x = if num % x = 0 then true else false
+//let isdiv num x = if num % x = 0 then true else false
 
-// 1
+//// 1
 
+//let isprime number =
+//    let rec isprime number index =
+//        if index >= number then true
+//        else
+//            if not (isdiv number index)
+//            then isprime number (index+1)
+//            else false
+//    isprime number 2
 
-let isprime number =
-    let rec isprime number index =
-        if index >= number then true
-        else
-            if not (isdiv number index)
-            then isprime number (index+1)
-            else false
-    isprime number 1
+//let getmaxPrimeAndDivBy number =
+//    let rec getmaxPrimeAndDivBy number index max =
+//        if index > number then max
+//        else
+//            if (isprime index) && (isdiv number index)
+//            then
+//                getmaxPrimeAndDivBy number (index+1) index
+//            else
+//                getmaxPrimeAndDivBy number (index+1) max
+//    getmaxPrimeAndDivBy number 2 1
 
-let getmaxPrimeAndDivBy number =
-    let rec getmaxPrimeAndDivBy number index max =
-        if index > number then max
-        else
-            if (isprime index) && (isdiv number index)
-            then
-                getmaxPrimeAndDivBy number (index+1) index
-            else
-                getmaxPrimeAndDivBy number (index+1) max
-    getmaxPrimeAndDivBy number 2 1
+//let solve181 x =
+//    printfn "18.1 x = %A" x
+//    let max =  getmaxPrimeAndDivBy x
+//    printfn "max = %A" max
 
-let solve181 x =
-    printfn "18.1 x = %A" x
-    let max =  getmaxPrimeAndDivBy x
-    printfn "max = %A" max
+////2
 
-//2
+//let getLastDigit x = x % 10
+//let removeLastDigit x = x / 10
 
-let getLastDigit x = x % 10
-let removeLastDigit x = x / 10
+//let isDiv5 x = if x % 5 = 0 then true else false
 
-let isDiv5 x = if x % 5 = 0 then true else false
-
-let prodDigitsNonDiv5 x = 
-    let rec prodNonDiv5TC num prod =
-        if num = 0 then prod
-        else
-            let digit = getLastDigit num
-            if not (isDiv5 digit)
-            then prodNonDiv5TC (removeLastDigit num) (prod*digit)
-            else prodNonDiv5TC (removeLastDigit num) prod
-    prodNonDiv5TC x 1
+//let prodDigitsNonDiv5 x = 
+//    let rec prodNonDiv5TC num prod =
+//        if num = 0 then prod
+//        else
+//            let digit = getLastDigit num
+//            if not (isDiv5 digit)
+//            then prodNonDiv5TC (removeLastDigit num) (prod*digit)
+//            else prodNonDiv5TC (removeLastDigit num) prod
+//    prodNonDiv5TC x 1
     
 
-let solve182 x =
-    printfn "Произведение цифр числа - %A" (prodDigitsNonDiv5 x)
+//let solve182 x =
+//    printfn "Произведение цифр числа - %A" (prodDigitsNonDiv5 x)
 
-//3
+////3
 
-let isnondiv2 x = if (x % 2 <> 0) then true else false
+//let isnondiv2 x = if (x % 2 <> 0) then true else false
 
-let prod x = 
-    let rec prodTC num prod =
-        if num = 0 then prod
-        else
-            let digit = getLastDigit num
-            prodTC (removeLastDigit num) (prod*digit)
-    prodTC x 1
+//let prod x = 
+//    let rec prodTC num prod =
+//        if num = 0 then prod
+//        else
+//            let digit = getLastDigit num
+//            prodTC (removeLastDigit num) (prod*digit)
+//    prodTC x 1
 
-let rec isnonprime number index =
-    if index >= number then false
-    else
-        if (isdiv number index)
-        then true
-        else isnonprime number (index+1)
+//let rec isnonprime number index =
+//    if index >= number then false
+//    else
+//        if (isdiv number index)
+//        then true
+//        else isnonprime number (index+1)
 
-let getmaxNonPrimeAndNonDiv2 number =
-    let rec getmaxNonPrimeAndNonDiv2TC number index max =
-        if index > number then max
-        else
-            if (isnonprime index 2) && (isnondiv2 index) && (isdiv number index)
-            then
-                getmaxNonPrimeAndNonDiv2TC number (index+1) index
-            else
-                getmaxNonPrimeAndNonDiv2TC number (index+1) max
-    getmaxNonPrimeAndNonDiv2TC number 2 1
+//let getmaxNonPrimeAndNonDiv2 number =
+//    let rec getmaxNonPrimeAndNonDiv2TC number index max =
+//        if index > number then max
+//        else
+//            if (isnonprime index 2) && (isnondiv2 index) && (isdiv number index)
+//            then
+//                getmaxNonPrimeAndNonDiv2TC number (index+1) index
+//            else
+//                getmaxNonPrimeAndNonDiv2TC number (index+1) max
+//    getmaxNonPrimeAndNonDiv2TC number 2 1
 
-let case183 x =
+//let solve183 x =
+//    printfn "Число — %A" x
+//    let X = getmaxNonPrimeAndNonDiv2 x
+//    let Y = prod x
+//    printfn "GCD %A и %A - %A" X Y (gcd x Y)
+
+//// 20
+
+let matchwithfunc = function
+    | 1 -> solve181
+    | 2 -> solve182
+    | 3 -> solve183
+
+
+let task20 (ind, x) =
+    
     printfn "Число — %A" x
-    let X = getmaxNonPrimeAndNonDiv2 x
-    let Y = prod x
-    printfn "GCD %A и %A - %A" X Y (gcd x Y)
+    printfn "Номер функции — %A" ind
+
+    //curring implementation
+    x |> (ind |> matchwithfunc)
+    //superpositions implementation
+    let ident x = x
+    (matchwithfunc << ident) ind x
+    
 
 [<EntryPoint>]
 let main argv =
@@ -406,4 +425,5 @@ let main argv =
     //case181 34
     //case182 3245
     //case183 63
+    task20 (1, 34)
     0 // return 0
