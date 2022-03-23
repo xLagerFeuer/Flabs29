@@ -9,36 +9,36 @@ let ident x = x
 
 // 11
 
-let sum x y z =
-    x + y + z
+//let sum x y z =
+//    x + y + z
 
-let times x y z =
-    x * y * z
+//let times x y z =
+//    x * y * z
 
-// — можно сделать красивше до полной чистоты функции, применив ещё две функции: проверяют пустоту и возвращают 1 в случае проверки пустоты
-// а функцию sum сделать каррируемой саму на себя
-// let return1 x = 1
-// let isunit x = if x = () then true else false
+//// — можно сделать красивше до полной чистоты функции, применив ещё две функции: проверяют пустоту и возвращают 1 в случае проверки пустоты
+//// а функцию sum сделать каррируемой саму на себя
+//// let return1 x = 1
+//// let isunit x = if x = () then true else false
 
-let rec mapTC lst (func:(int->int->int->int)) =
-    match lst with
-    | x::(y::(z::tail)) -> (func x y z)::(mapTC tail func)
-    | x::(y::tail) -> (func x y 1)::[]
-    | x::tail -> (func x 1 1)::[]
+//let rec mapTC lst (func:(int->int->int->int)) =
+//    match lst with
+//    | x::(y::(z::tail)) -> (func x y z)::(mapTC tail func)
+//    | x::(y::tail) -> (func x y 1)::[]
+//    | x::tail -> (func x 1 1)::[]
 
-let map lst func = 
-    mapTC lst func
+//let map lst func = 
+//    mapTC lst func
 
-// get map: len lst1 % 3 = 0, len lst2 * 3 = len lst1, lst1 -> lst2
-let task11 lst func =
-    map lst func
+//// get map: len lst1 % 3 = 0, len lst2 * 3 = len lst1, lst1 -> lst2
+//let task11 lst func =
+//    map lst func
 
-[<EntryPoint>]
-let main argv = 
-    let lst = [1;4;11;2;7;9;20]
-    printfn "%A" (task11 lst sum)
-    printfn "%A" (task11 lst times)
-    0
+//[<EntryPoint>]
+//let main argv = 
+//    let lst = [1;4;11;2;7;9;20]
+//    printfn "%A" (task11 lst sum)
+//    printfn "%A" (task11 lst times)
+//    0
 
 (*
  Variant 3 — Alexander Zhdanoff
@@ -46,27 +46,28 @@ let main argv =
  12—20
 *)
 
-//// task3
+// task3
 
-// индексация n с нуля aka индекс массивов a[0]
-//let rec isNglMaxSearchTC lst n max=
-//    match lst with
-//    | head::tail when (n = 0) -> if head >= max then true else false
-//    | head::tail when  head > max -> isNglMaxSearchTC tail (n-1) head
-//    | head::tail -> isNglMaxSearchTC tail (n-1) max
+//глобальный максимум => самый большое значение max
+//индексация n с нуля aka индекс массивов a[0]
+let rec isNglMaxSearchTC lst n max=
+    match lst with
+    | head::tail when (n = 0) -> if head >= max then true else false
+    | head::tail when  head > max -> isNglMaxSearchTC tail (n-1) head
+    | head::tail -> isNglMaxSearchTC tail (n-1) max
 
-//let isNglMaxSearch lst n =
-//    isNglMaxSearchTC  lst n (Int32.MinValue)
+let isNglMaxSearch lst n =
+    isNglMaxSearchTC  lst n (Int32.MinValue)
 
-//let task3 array n =
-//    isNglMaxSearch array n
+let task3 array n =
+    isNglMaxSearch array n
 
-//[<EntryPoint>]
-//let main argv = 
-//    let array = [5; 11; 3; 18; 9; 2; 3] 
-//    let n = 4
-//    printfn "%A" (task3 array n)
-//    0
+[<EntryPoint>]
+let main argv = 
+    let array = [5; 11; 3; 18; 9; 2; 3] 
+    let n = 4
+    printfn "%A" (task3 array n)
+    0
 
 //// task11
 
