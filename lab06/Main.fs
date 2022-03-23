@@ -50,46 +50,45 @@ let ident x = x
 
 //глобальный максимум => самый большое значение max
 //индексация n с нуля aka индекс массивов a[0]
-let rec isNglMaxSearchTC lst n max=
-    match lst with
-    | head::tail when (n = 0) -> if head >= max then true else false
-    | head::tail when  head > max -> isNglMaxSearchTC tail (n-1) head
-    | head::tail -> isNglMaxSearchTC tail (n-1) max
-
-let isNglMaxSearch lst n =
-    isNglMaxSearchTC  lst n (Int32.MinValue)
-
-let task3 array n =
-    isNglMaxSearch array n
-
-[<EntryPoint>]
-let main argv = 
-    let array = [5; 11; 3; 18; 9; 2; 3] 
-    let n = 4
-    printfn "%A" (task3 array n)
-    0
-
-//// task11
-
-//let union x y = if x && y then true else false
-
-//let rec findAnotherTC lst diff =
+//let rec isNglMaxSearchTC lst n max=
 //    match lst with
-//    | head::tail when head = diff -> findAnother tail 
+//    | head::tail when (n = 0) -> if head >= max then true else false
 //    | head::tail when  head > max -> isNglMaxSearchTC tail (n-1) head
 //    | head::tail -> isNglMaxSearchTC tail (n-1) max
 
-//let findAnother lst =
-//    findAnotherTC lst.Tail lst.Head
+//let isNglMaxSearch lst n =
+//    isNglMaxSearchTC  lst n (Int32.MinValue)
 
-//let task11 array =
-//    findAnother array
+//let task3 array n =
+//    isNglMaxSearch array n
 
 //[<EntryPoint>]
 //let main argv = 
-//    let array = [5; 5; 4; 5; 5; 5; 5] 
-//    printfn "%A" (task11 array)
+//    let array = [5; 11; 3; 18; 9; 2; 3] 
+//    let n = 4
+//    printfn "%A" (task3 array n)
 //    0
+
+//// task11
+
+let union x y = if x && y then true else false
+
+let findAnother (lst:int list) =
+    let rec getDiff lst diff =
+        match lst with
+        | head::tail when head = diff -> getDiff tail diff
+        | x::y::tail ->
+            if diff = x then y else x
+    getDiff lst.Tail lst.Head
+
+let task11 array =
+    findAnother array
+
+[<EntryPoint>]
+let main argv = 
+    let array = [5; 5; 4; 5; 5; 5; 5] 
+    printfn "%A" (task11 array)
+    0
 
 //// task13
 
