@@ -36,35 +36,35 @@ tasks: 3, 13, 23, 33, 43, 53
 
 // task23
 
-let task23 lst =
-    let sorted = List.sort lst
-    let min1, min2 = sorted.Head, sorted.Tail.Head
-    (min1, min2)
+//let task23 lst =
+//    let sorted = List.sort lst
+//    let min1, min2 = sorted.Head, sorted.Tail.Head
+//    (min1, min2)
 
-[<EntryPoint>]
-let main argv = 
-    let lst = [5;11;3;21;17;19;14]
-    printfn "%A" (task23 lst)
-    0
+//[<EntryPoint>]
+//let main argv = 
+//    let lst = [5;11;3;21;17;19;14]
+//    printfn "%A" (task23 lst)
+//    0
 
 //// task33
 
-//let task33 (lst:int list) =
-//    let first = lst.Head
-//    let scnd = lst.Tail.Head
+let task33 (lst:int list) =
+    let first = lst.Head
+    let scnd = lst.Tail.Head
 
-//    if first * scnd < 0
-//    then
-//        let siqnseq = seq {for i in 1..2..lst.Length do yield! seq {sign first; sign scnd}}
-//        Seq.forall2 (fun x y -> if x*y > 0 then true else false) lst siqnseq
-//    else false
+    if first * scnd < 0
+    then
+        let siqnseq = seq {for i in 1..2..lst.Length do yield! seq {sign first; sign scnd}}
+        Seq.forall2 (fun x y -> if x*y > 0 then true else false) lst siqnseq
+    else false
         
     
-//[<EntryPoint>]
-//let main argv = 
-//    let lst = [-3; 2; -1; 1; -1; 1]
-//    printfn "%A" (task33 lst)
-//    0
+[<EntryPoint>]
+let main argv = 
+    let lst = [-3; 2; -1; 1; -1; 1]
+    printfn "%A" (task33 lst)
+    0
 
 //// task43
 
@@ -121,19 +121,22 @@ Variant 3 Alexander Zhdanoff
 //    ]
 
 //    let pairs = [
-//        let n = (divs.Length / 2 + 1 + (divs.Length % 2))
+//        let n = (divs.Length / 2 - 1 + (divs.Length % 2))
 //        for i in 0..n do
-//            yield (divs.Item i, divs.Item (n - i))
+//            yield (divs.Item i, divs.Item (divs.Length - 1 - i))
 //    ]
+//    //let pairs = divs |> List.allPairs divs |> List.filter (fun (x, y) -> x*y = num)
+
 //    [
 //    for pair in pairs do
 //        let gcd = pair |> gcd
-//        yield (fst pair * gcd, snd pair * gcd)
+//        yield (fst pair / gcd, snd pair / gcd)
 //    ]
+
 
 //[<EntryPoint>]
 //let main argv = 
-//    let num = 34
+//    let num = 625
 //    printfn "%A" (solve17 num)
 //    0
 
@@ -142,12 +145,45 @@ Variant 3 Alexander Zhdanoff
 18.
 *)
 
+//let solve18 arr1 arr2 = 
+//    let folder = [| arr1; arr2 |]
+//    Array.concat folder
+
+//[<EntryPoint>]
+//let main argv = 
+//    let arr1 = [| for i in 1..10 do yield i |]
+//    let arr2 = [| for i in 11..20 do yield i |]
+//    printfn "%A" (solve18 arr1 arr2)
+//    0
 
 (*
 Variant 3 Alexander Zhdanoff
 19.
+task 8, task 16
 *)
 
+//let task8 =
+//let task16 =
+
+//[<EntryPoint>]
+//let main argv = 
+//    let str = "Lorem Ipsum Dolor Ligma Filo Degro Giga Cdfi"
+//    let arr = [|
+//        "Red";
+//        "While";
+//        "Blue"
+//    |]
+
+//    System.Console.WriteLine "Выберите программу 1—2:"
+//    match System.Console.ReadLine with
+//    | "1" -> task8 str
+//    | "2" -> task16 
+//    | _ -> System.Console.WriteLine
+
+//    let arr1 = [| for i in 1..10 do yield i |]
+//    let arr2 = [| for i in 11..20 do yield i |]
+//    printfn "%A" (func arr1 arr2)
+//    0
 
 (*
 Variant 3 Alexander Zhdanoff
