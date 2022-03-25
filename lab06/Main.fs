@@ -171,61 +171,62 @@ let ident x = x
 
 // task39
 
-let task39 lst =
-    let rec outEven lst =
-        match lst with
-        | even1::odd::tail -> 
-            printf "%A " even1
-            outEven tail
-        | [] -> ()
-        | even -> 
-            printf "%A " even
-            ()
-    and outOdd lst  =
-        match lst with
-        | odd1::even::tail -> 
-            printf "%A " odd1
-            outOdd tail
-        | head::[] -> 
-            printf "%A " head
-            ()
+//let task39 lst =
+//    let rec outEven lst =
+//        match lst with
+//        | even1::odd::tail -> 
+//            printf "%A " even1
+//            outEven tail
+//        | [] -> ()
+//        | even -> 
+//            printf "%A " even
+//            ()
+//    and outOdd lst  =
+//        match lst with
+//        | odd1::even::tail -> 
+//            printf "%A " odd1
+//            outOdd tail
+//        | head::[] -> 
+//            printf "%A " head
+//            ()
         
-    outEven lst
-    outOdd lst.Tail
+//    outEven lst
+//    outOdd lst.Tail
 
-[<EntryPoint>]
-let main argv = 
-    let arr = [for i in 1..20 do yield i]
-    printfn "%A" <| task39 arr
-    0
+//[<EntryPoint>]
+//let main argv = 
+//    let arr = [for i in 1..20 do yield i]
+//    printfn "%A" <| task39 arr
+//    0
 
 // task45
 
-//let rec accCond lst (cond:int->bool) func acc =
-//    match lst with
-//    | head::tail when cond head -> accCond tail cond func (func acc head)
-//    | head::tail -> accCond tail cond func acc
-//    | _ -> acc
+let rec accCond lst (cond:int->bool) func acc =
+    match lst with
+    | head::tail when cond head -> accCond tail cond func (func acc head)
+    | head::tail -> accCond tail cond func acc
+    | _ -> acc
 
-//let isStoredInSeq seq elem :bool =
-//    let mutable itContains = false
-//    for iter in seq do
-//        // отвратительная реализация if-then, т.к. буливое возвращение if-then без else невозможен по документации.
-//        // реализации прохода последовательности через рекурсии нет, только через методы класса, которые по условию задачи запрещены.
-//        if iter = elem then
-//            itContains <- true
-//    itContains
+let isStoredInSeq seq elem :bool =
+    let mutable itContains = false
+    for iter in seq do
+        // отвратительная реализация if-then, т.к. булевое возвращение if-then без else невозможен по документации.
+        // реализации прохода последовательности через рекурсии нет, только через методы класса, которые по условию задачи запрещены.
+        // мутабельное выражение (переменная) находится внутри функции, а значит чистота функции сохраняется
+        if iter = elem then
+            itContains <- true
+    itContains
 
-//let task45 lst interval =
-//    accCond lst (isStoredInSeq interval) (fun x y -> x + y) 0
+let task45 lst interval =
+    accCond lst (isStoredInSeq interval) (fun x y -> x + y) 0
             
-//[<EntryPoint>]
-//let main argv = 
-//    let interval = seq {25..35}
-//    printfn "%A" interval
-//    let array = [25; 9; 3; 33; 52]
-//    task45 array interval |> printfn "%A"
-//    0
+[<EntryPoint>]
+let main argv = 
+    let interval = seq {25..35}
+    printfn "%A" interval
+    let array = [25; 9; 3; 33; 52]
+    task45 array interval |> printfn "%A"
+    0
 
 //// task51
 

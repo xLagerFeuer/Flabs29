@@ -11,6 +11,8 @@
 /lab06/bin
 /lab06/obj
 /lab07/obj
+/lab07/bin
+/lab08/obj
 
 *.config
 *.fs
