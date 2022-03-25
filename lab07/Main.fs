@@ -22,30 +22,30 @@ tasks: 3, 13, 23, 33, 43, 53
 
 //// task13
 
-let task13 lst =
-    let min = List.min lst
-    let minindex = List.findIndex (fun x -> x = min) lst
-    let lst1, lst2 = List.splitAt minindex lst
-    lst2 @ lst1
-
-[<EntryPoint>]
-let main argv = 
-    let lst = [5;11;3;21;17;19;14]
-    printfn "%A" (task13 lst)
-    0
-
-// task23
-
-//let task23 lst =
-//    let sorted = List.sort lst
-//    let min1, min2 = sorted.Head, sorted.Tail.Head
-//    (min1, min2)
+//let task13 lst =
+//    let min = List.min lst
+//    let minindex = List.findIndex (fun x -> x = min) lst
+//    let lst1, lst2 = List.splitAt minindex lst
+//    lst2 @ lst1
 
 //[<EntryPoint>]
 //let main argv = 
 //    let lst = [5;11;3;21;17;19;14]
-//    printfn "%A" (task23 lst)
+//    printfn "%A" (task13 lst)
 //    0
+
+// task23
+
+let task23 lst =
+    let sorted = List.sort lst
+    let min1, min2 = sorted.Head, sorted.Tail.Head
+    (min1, min2)
+
+[<EntryPoint>]
+let main argv = 
+    let lst = [5;11;3;21;17;19;14]
+    printfn "%A" (task23 lst)
+    0
 
 //// task33
 
@@ -100,3 +100,56 @@ let main argv =
 //    let lst = [2;4;5;1;2;3;1;17]
 //    printfn "average, max, list: %A" (task53 lst)
 //    0
+
+
+(*
+Variant 3 Alexander Zhdanoff
+17.
+Для введенного числа N построить список неповторяющихся кортежей
+(a,b), таких, что существует пара (x,y): X*Y=N, НОД(X,Y)=d, a=X/d, b=Y/d
+*)
+
+//let rec gcd (x, y) =
+//    if y = 0 then x
+//    else gcd (y, (x % y))
+
+//let solve17 num =
+//    let divs = [
+//        for i in 1..num do
+//            if num % i = 0
+//            then yield i
+//    ]
+
+//    let pairs = [
+//        let n = (divs.Length / 2 + 1 + (divs.Length % 2))
+//        for i in 0..n do
+//            yield (divs.Item i, divs.Item (n - i))
+//    ]
+//    [
+//    for pair in pairs do
+//        let gcd = pair |> gcd
+//        yield (fst pair * gcd, snd pair * gcd)
+//    ]
+
+//[<EntryPoint>]
+//let main argv = 
+//    let num = 34
+//    printfn "%A" (solve17 num)
+//    0
+
+(*
+Variant 3 Alexander Zhdanoff
+18.
+*)
+
+
+(*
+Variant 3 Alexander Zhdanoff
+19.
+*)
+
+
+(*
+Variant 3 Alexander Zhdanoff
+20.
+*)
