@@ -201,72 +201,72 @@ let ident x = x
 
 // task45
 
-let rec accCond lst (cond:int->bool) func acc =
-    match lst with
-    | head::tail when cond head -> accCond tail cond func (func acc head)
-    | head::tail -> accCond tail cond func acc
-    | _ -> acc
+//let rec accCond lst (cond:int->bool) func acc =
+//    match lst with
+//    | head::tail when cond head -> accCond tail cond func (func acc head)
+//    | head::tail -> accCond tail cond func acc
+//    | _ -> acc
 
-let isStoredInSeq seq elem :bool =
-    let mutable itContains = false
-    for iter in seq do
-        // отвратительная реализация if-then, т.к. булевое возвращение if-then без else невозможен по документации.
-        // реализации прохода последовательности через рекурсии нет, только через методы класса, которые по условию задачи запрещены.
-        // мутабельное выражение (переменная) находится внутри функции, а значит чистота функции сохраняется
-        if iter = elem then
-            itContains <- true
-    itContains
+//let isStoredInSeq seq elem :bool =
+//    let mutable itContains = false
+//    for iter in seq do
+//        // отвратительная реализация if-then, т.к. булевое возвращение if-then без else невозможен по документации.
+//        // реализации прохода последовательности через рекурсии нет, только через методы класса, которые по условию задачи запрещены.
+//        // мутабельное выражение (переменная) находится внутри функции, а значит чистота функции сохраняется
+//        if iter = elem then
+//            itContains <- true
+//    itContains
 
-let task45 lst interval =
-    accCond lst (isStoredInSeq interval) (fun x y -> x + y) 0
+//let task45 lst interval =
+//    accCond lst (isStoredInSeq interval) (fun x y -> x + y) 0
             
-[<EntryPoint>]
-let main argv = 
-    let interval = seq {25..35}
-    printfn "%A" interval
-    let array = [25; 9; 3; 33; 52]
-    task45 array interval |> printfn "%A"
-    0
+//[<EntryPoint>]
+//let main argv = 
+//    let interval = seq {25..35}
+//    printfn "%A" interval
+//    let array = [25; 9; 3; 33; 52]
+//    task45 array interval |> printfn "%A"
+//    0
 
 //// task51
 
-//let returnIndex lst elem =
-//    let rec indexTC lst elem ind = 
-//        match lst with
-//        | head::tail when head = elem -> ind
-//        | head::tail -> indexTC tail elem (ind+1)
-//    indexTC lst elem 0
+let returnIndex lst elem =
+    let rec indexTC lst elem ind = 
+        match lst with
+        | head::tail when head = elem -> ind
+        | head::tail -> indexTC tail elem (ind+1)
+    indexTC lst elem 0
 
-//let rec incelem lst n =
-//    match lst with
-//    | head::tail when n = 0 -> (head+1)::tail
-//    | head::tail -> head::(incelem tail (n-1))
+let rec incelem lst n =
+    match lst with
+    | head::tail when n = 0 -> (head+1)::tail
+    | head::tail -> head::(incelem tail (n-1))
 
-//let rec contains elem lst = 
-//    match lst with
-//    | head::tail when elem = head -> true
-//    | head::tail -> contains elem tail
-//    | _ -> false
+let rec contains elem lst = 
+    match lst with
+    | head::tail when elem = head -> true
+    | head::tail -> contains elem tail
+    | _ -> false
 
-//let task51 lst =
-//    let rec getUniq lst uniq =
-//        match lst with
-//        | head::tail when uniq |> (contains head) -> getUniq tail uniq
-//        | head::tail -> getUniq tail (head::uniq)
-//        | _ -> uniq
-//    let rec getFrequency lst uniq freq =
-//        match lst with
-//        | head::tail -> returnIndex uniq head |> incelem freq |> getFrequency tail uniq
-//        | _ -> freq
+let task51 lst =
+    let rec getUniq lst uniq =
+        match lst with
+        | head::tail when uniq |> (contains head) -> getUniq tail uniq
+        | head::tail -> getUniq tail (head::uniq)
+        | _ -> uniq
+    let rec getFrequency lst uniq freq =
+        match lst with
+        | head::tail -> returnIndex uniq head |> incelem freq |> getFrequency tail uniq
+        | _ -> freq
 
-//    let uniqList = getUniq lst []
-//    let accFrequency = [for i in 1..uniqList.Length do yield 0]
+    let uniqList = getUniq lst []
+    let accFrequency = [for i in 1..uniqList.Length do yield 0]
 
-//    (uniqList, getFrequency lst uniqList accFrequency)
+    (uniqList, getFrequency lst uniqList accFrequency)
 
-//[<EntryPoint>]
-//let main argv = 
-//    //let lst = [2; 5; 4; 5; 0; 15; 1]
-//    let lst = [2;5;4;3;2]
-//    printfn "Uniqal and their Frequence — %A" (task51 lst)
-//    0
+[<EntryPoint>]
+let main argv = 
+    //let lst = [2; 5; 4; 5; 0; 15; 1]
+    let lst = [2;5;4;3;2]
+    printfn "Uniqal and their Frequence — %A" (task51 lst)
+    0
