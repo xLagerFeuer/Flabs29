@@ -68,38 +68,38 @@ tasks: 3, 13, 23, 33, 43, 53
 
 //// task43
 
-let getmincounts (lst, min) =
-    List.filter (fun x -> x = min) lst |> List.length
+//let getmincounts (lst, min) =
+//    List.filter (fun x -> x = min) lst |> List.length
 
-let task43 lst =
-     (lst, List.min lst) |> getmincounts
+//let task43 lst =
+//     (lst, List.min lst) |> getmincounts
     
-
-[<EntryPoint>]
-let main argv = 
-    let lst = [5;11;3;21;3;17;19;14]
-    let ind = 3
-    printfn "%A" (task43 lst)
-    0
-
-//// task53
-
-//let roundup x = 
-//    let res = round x
-//    if x > res then res + 1.0
-//    else res
-
-//let task53 lst = 
-//    let floated = List.map (fun x -> float x) lst
-//    let max = List.max floated
-//    let average = List.average floated
-//    (average, max, [ for i in (average |> roundup)..max do yield i ])
 
 //[<EntryPoint>]
 //let main argv = 
-//    let lst = [2;4;5;1;2;3;1;17]
-//    printfn "average, max, list: %A" (task53 lst)
+//    let lst = [5;11;3;21;3;17;19;14]
+//    let ind = 3
+//    printfn "%A" (task43 lst)
 //    0
+
+//// task53
+
+let roundup x = 
+    let res = round x
+    if x > res then res + 1.0
+    else res
+
+let task53 lst = 
+    let floated = List.map (fun x -> float x) lst
+    let max = List.max floated
+    let average = List.average floated
+    (average, max, [ for i in (average |> roundup)..max do yield i ])
+
+[<EntryPoint>]
+let main argv = 
+    let lst = [2;4;5;1;2;3;1;17]
+    printfn "average, max, list: %A" (task53 lst)
+    0
 
 
 (*
