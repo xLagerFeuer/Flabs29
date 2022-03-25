@@ -49,38 +49,38 @@ tasks: 3, 13, 23, 33, 43, 53
 
 //// task33
 
-let task33 (lst:int list) =
-    let first = lst.Head
-    let scnd = lst.Tail.Head
+//let task33 (lst:int list) =
+//    let first = lst.Head
+//    let scnd = lst.Tail.Head
 
-    if first * scnd < 0
-    then
-        let siqnseq = seq {for i in 1..2..lst.Length do yield! seq {sign first; sign scnd}}
-        Seq.forall2 (fun x y -> if x*y > 0 then true else false) lst siqnseq
-    else false
+//    if first * scnd < 0
+//    then
+//        let siqnseq = seq {for i in 1..2..lst.Length do yield! seq {sign first; sign scnd}}
+//        Seq.forall2 (fun x y -> if x*y > 0 then true else false) lst siqnseq
+//    else false
         
     
-[<EntryPoint>]
-let main argv = 
-    let lst = [-3; 2; -1; 1; -1; 1]
-    printfn "%A" (task33 lst)
-    0
+//[<EntryPoint>]
+//let main argv = 
+//    let lst = [-3; 2; -1; 1; -1; 1]
+//    printfn "%A" (task33 lst)
+//    0
 
 //// task43
 
-//let getmincounts (lst, min) =
-//    List.filter (fun x -> x = min) lst |> List.length
+let getmincounts (lst, min) =
+    List.filter (fun x -> x = min) lst |> List.length
 
-//let task43 lst =
-//     (lst, List.min lst) |> getmincounts
+let task43 lst =
+     (lst, List.min lst) |> getmincounts
     
 
-//[<EntryPoint>]
-//let main argv = 
-//    let lst = [5;11;3;21;3;17;19;14]
-//    let ind = 3
-//    printfn "%A" (task43 lst)
-//    0
+[<EntryPoint>]
+let main argv = 
+    let lst = [5;11;3;21;3;17;19;14]
+    let ind = 3
+    printfn "%A" (task43 lst)
+    0
 
 //// task53
 
@@ -162,27 +162,41 @@ Variant 3 Alexander Zhdanoff
 task 8, task 16
 *)
 
-//let task8 =
-//let task16 =
+//let task3 (str:string) =
+//    let splitted = str.Split " "
+//    let rnd = System.Random()
+//    let res = splitted |> Array.sortBy (fun x -> rnd.Next(0, splitted.Length))
+//    res |> String.concat " " |> printfn "%A"
+
+//let task8 (str:string) =
+//    let splited = str.Split " "
+//    Array.fold (fun acc x -> if (x |> String.length) % 2 = 0 then acc+1 else acc) 0 splited |> printfn "%A"
+
+//let task16 flag =
+//    let cmprColots = function 
+//        | "White" -> 0
+//        | "Blue" -> 1
+//        | "Red" -> 2
+//    Array.sortBy (fun color -> cmprColots color) flag |> Array.iter (fun x -> printfn "%A" x)
 
 //[<EntryPoint>]
 //let main argv = 
-//    let str = "Lorem Ipsum Dolor Ligma Filo Degro Giga Cdfi"
-//    let arr = [|
+//    let loremipsum3 = "A B C D E F G H I K L"
+//    let loremipsum8 = "Lorem Ipsum Dolor Ligma Filo Degro Giga Cdfi"
+//    let flag = [|
 //        "Red";
-//        "While";
+//        "White";
 //        "Blue"
 //    |]
+    
+//    System.Console.WriteLine "Выберите программу 3,8,16:"
+//    let task = match System.Console.ReadLine() with
+//    | "3" -> task3 loremipsum3
+//    | "8" -> task8 loremipsum8
+//    | "16" -> task16 flag
+//    | _ -> printfn "Неправильный символ"
 
-//    System.Console.WriteLine "Выберите программу 1—2:"
-//    match System.Console.ReadLine with
-//    | "1" -> task8 str
-//    | "2" -> task16 
-//    | _ -> System.Console.WriteLine
-
-//    let arr1 = [| for i in 1..10 do yield i |]
-//    let arr2 = [| for i in 11..20 do yield i |]
-//    printfn "%A" (func arr1 arr2)
+//    //printfn "%A" task
 //    0
 
 (*
