@@ -168,16 +168,16 @@ task3, task 8, task 16
 //    let res = splitted |> Array.sortBy (fun x -> rnd.Next(0, splitted.Length))
 //    res |> String.concat " " |> printfn "%A"
 
-let task8 (str:string) =
-    let splited = str.Split " "
-    Array.fold (fun acc x -> if (x |> String.length) % 2 = 0 then acc+1 else acc) 0 splited |> printfn "%A"
+//let task8 (str:string) =
+//    let splited = str.Split " "
+//    Array.fold (fun acc x -> if (x |> String.length) % 2 = 0 then acc+1 else acc) 0 splited |> printfn "%A"
 
-//let task16 flag =
-//    let cmprColots = function 
-//        | "White" -> 0
-//        | "Blue" -> 1
-//        | "Red" -> 2
-//    Array.sortBy (fun color -> cmprColots color) flag |> Array.iter (fun x -> printfn "%A" x)
+let task16 flag =
+    let cmprColots = function 
+        | "White" -> 0
+        | "Blue" -> 1
+        | "Red" -> 2
+    Array.sortBy (fun color -> cmprColots color) flag |> Array.iter (fun x -> printfn "%A" x)
 
 //[<EntryPoint>]
 //let main argv = 
