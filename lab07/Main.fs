@@ -84,22 +84,22 @@ tasks: 3, 13, 23, 33, 43, 53
 
 //// task53
 
-let roundup x = 
-    let res = round x
-    if x > res then res + 1.0
-    else res
+//let roundup x = 
+//    let res = round x
+//    if x > res then res + 1.0
+//    else res
 
-let task53 lst = 
-    let floated = List.map (fun x -> float x) lst
-    let max = List.max floated
-    let average = List.average floated
-    (average, max, [ for i in (average |> roundup)..max do yield i ])
+//let task53 lst = 
+//    let floated = List.map (fun x -> float x) lst
+//    let max = List.max floated
+//    let average = List.average floated
+//    (average, max, [ for i in (average |> roundup)..max do yield i ])
 
-[<EntryPoint>]
-let main argv = 
-    let lst = [2;4;5;1;2;3;1;17]
-    printfn "average, max, list: %A" (task53 lst)
-    0
+//[<EntryPoint>]
+//let main argv = 
+//    let lst = [2;4;5;1;2;3;1;17]
+//    printfn "average, max, list: %A" (task53 lst)
+//    0
 
 
 (*
@@ -109,36 +109,36 @@ Variant 3 Alexander Zhdanoff
 (a,b), таких, что существует пара (x,y): X*Y=N, НОД(X,Y)=d, a=X/d, b=Y/d
 *)
 
-//let rec gcd (x, y) =
-//    if y = 0 then x
-//    else gcd (y, (x % y))
+let rec gcd (x, y) =
+    if y = 0 then x
+    else gcd (y, (x % y))
 
-//let solve17 num =
-//    let divs = [
-//        for i in 1..num do
-//            if num % i = 0
-//            then yield i
-//    ]
+let solve17 num =
+    let divs = [
+        for i in 1..num do
+            if num % i = 0
+            then yield i
+    ]
 
-//    let pairs = [
-//        let n = (divs.Length / 2 - 1 + (divs.Length % 2))
-//        for i in 0..n do
-//            yield (divs.Item i, divs.Item (divs.Length - 1 - i))
-//    ]
-//    //let pairs = divs |> List.allPairs divs |> List.filter (fun (x, y) -> x*y = num)
+    let pairs = [
+        let n = (divs.Length / 2 - 1 + (divs.Length % 2))
+        for i in 0..n do
+            yield (divs.Item i, divs.Item (divs.Length - 1 - i))
+    ]
+    //let pairs = divs |> List.allPairs divs |> List.filter (fun (x, y) -> x*y = num)
 
-//    [
-//    for pair in pairs do
-//        let gcd = pair |> gcd
-//        yield (fst pair / gcd, snd pair / gcd)
-//    ]
+    [
+    for pair in pairs do
+        let gcd = pair |> gcd
+        yield (fst pair / gcd, snd pair / gcd)
+    ]
 
 
-//[<EntryPoint>]
-//let main argv = 
-//    let num = 625
-//    printfn "%A" (solve17 num)
-//    0
+[<EntryPoint>]
+let main argv = 
+    let num = 625
+    printfn "%A" (solve17 num)
+    0
 
 (*
 Variant 3 Alexander Zhdanoff
