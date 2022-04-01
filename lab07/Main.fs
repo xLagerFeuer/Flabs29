@@ -159,18 +159,18 @@ Variant 3 Alexander Zhdanoff
 (*
 Variant 3 Alexander Zhdanoff
 19.
-task 8, task 16
+task3, task 8, task 16
 *)
 
-let task3 (str:string) =
-    let splitted = str.Split " "
-    let rnd = System.Random()
-    let res = splitted |> Array.sortBy (fun x -> rnd.Next(0, splitted.Length))
-    res |> String.concat " " |> printfn "%A"
+//let task3 (str:string) =
+//    let splitted = str.Split " "
+//    let rnd = System.Random()
+//    let res = splitted |> Array.sortBy (fun x -> rnd.Next(0, splitted.Length))
+//    res |> String.concat " " |> printfn "%A"
 
-//let task8 (str:string) =
-//    let splited = str.Split " "
-//    Array.fold (fun acc x -> if (x |> String.length) % 2 = 0 then acc+1 else acc) 0 splited |> printfn "%A"
+let task8 (str:string) =
+    let splited = str.Split " "
+    Array.fold (fun acc x -> if (x |> String.length) % 2 = 0 then acc+1 else acc) 0 splited |> printfn "%A"
 
 //let task16 flag =
 //    let cmprColots = function 
@@ -266,19 +266,26 @@ task 3, 4
 //let squaresub master slave = (float)((ASCIIcode slave) - master)**2.0 // variable means closure
 //// let min master = fun slave -> slave - master — same declaration
 
-//let SD length mean seqChars =
-//    (seqChars |> Seq.map (squaresub mean) |> Seq.sum) / length
+//let SD verbose length mean seqChars =
+//    let res = (seqChars |> Seq.map (squaresub mean) |> Seq.sum) / (float)length
+//    if verbose then printfn "%A" res
+//    res
 
-//let getAvrgWeightASCII (string:string)=
-//    let seqChars = Seq.toList string
-//    mean string.Length seqChars
+//let solve4 verbose strings =
+//    let getAvrgWeightASCII (string:string)=
+//        let seqChars = Seq.toList string
+//        let res = mean string.Length seqChars
+//        if verbose then printfn "%A" res
+//        res
 
-//let solve4 strings =
-//    (Array.map getAvrgWeightASCII strings) |> Array.zip strings
+//    let stringsweights = (Array.map getAvrgWeightASCII strings) |> Array.zip strings
+//    if verbose then printfn "%A" stringsweights
+//    let avrgtarget = snd (stringsweights.[0])
+//    strings |> Array.sortBy (fun string -> SD verbose string.Length avrgtarget (Seq.toList string))
 
 //[<EntryPoint>]
 //let main argv = 
 //    let strings = [|"Sosiska v teste"; "Marmelad"; "Donada"; "12PO"; "2321"; "Q^4"|]
     
-//    printfn "%A" (solve4 strings)
+//    printfn "%A" (solve4 true strings)
 //    0
