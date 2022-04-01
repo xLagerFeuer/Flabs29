@@ -162,15 +162,15 @@ Variant 3 Alexander Zhdanoff
 task3, task 8, task 16
 *)
 
-//let task3 (str:string) =
-//    let splitted = str.Split " "
-//    let rnd = System.Random()
-//    let res = splitted |> Array.sortBy (fun x -> rnd.Next(0, splitted.Length))
-//    res |> String.concat " " |> printfn "%A"
+let task3 (str:string) =
+    let splitted = str.Split " "
+    let rnd = System.Random()
+    let res = splitted |> Array.sortBy (fun x -> rnd.Next(0, splitted.Length))
+    res |> String.concat " " |> printfn "%A"
 
-//let task8 (str:string) =
-//    let splited = str.Split " "
-//    Array.fold (fun acc x -> if (x |> String.length) % 2 = 0 then acc+1 else acc) 0 splited |> printfn "%A"
+let task8 (str:string) =
+    let splited = str.Split " "
+    Array.fold (fun acc x -> if (x |> String.length) % 2 = 0 then acc+1 else acc) 0 splited |> printfn "%A"
 
 let task16 flag =
     let cmprColots = function 
@@ -179,25 +179,25 @@ let task16 flag =
         | "Red" -> 2
     Array.sortBy (fun color -> cmprColots color) flag |> Array.iter (fun x -> printfn "%A" x)
 
-//[<EntryPoint>]
-//let main argv = 
-//    let loremipsum3 = "A B C D E F G H I K L"
-//    let loremipsum8 = "Lorem Ipsum Dolor Ligma Filo Degro Giga Cdfia"
-//    let flag = [|
-//        "Red";
-//        "White";
-//        "Blue"
-//    |]
+[<EntryPoint>]
+let main argv = 
+    let loremipsum3 = "A B C D E F G H I K L"
+    let loremipsum8 = "Lorem Ipsum Dolor Ligma Filo Degro Giga Cdfia"
+    let flag = [|
+        "Red";
+        "White";
+        "Blue"
+    |]
     
-//    System.Console.WriteLine "Выберите программу 3,8,16:"
-//    let task = match System.Console.ReadLine() with
-//    | "3" -> task3 loremipsum3
-//    | "8" -> task8 loremipsum8
-//    | "16" -> task16 flag
-//    | _ -> printfn "Неправильный символ"
+    System.Console.WriteLine "Выберите программу 3,8,16:"
+    let task = match System.Console.ReadLine() with
+    | "3" -> task3 loremipsum3
+    | "8" -> task8 loremipsum8
+    | "16" -> task16 flag
+    | _ -> printfn "Неправильный символ"
 
-//    //printfn "%A" task
-//    0
+    //printfn "%A" task
+    0
 
 (*
 Variant 3 Alexander Zhdanoff
