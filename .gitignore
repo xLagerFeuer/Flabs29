@@ -3,6 +3,7 @@
 ################################################################################
 
 /.vs
+/packages
 /other
 /lab5/obj
 /lab5/bin
@@ -13,9 +14,9 @@
 /lab07/obj
 /lab07/bin
 /lab08/obj
+/lab08/bin/
 
 *.config
 *.fs
 *.user
 
-/packages

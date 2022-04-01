@@ -162,42 +162,42 @@ Variant 3 Alexander Zhdanoff
 task3, task 8, task 16
 *)
 
-let task3 (str:string) =
-    let splitted = str.Split " "
-    let rnd = System.Random()
-    let res = splitted |> Array.sortBy (fun x -> rnd.Next(0, splitted.Length))
-    res |> String.concat " " |> printfn "%A"
+//let task3 (str:string) =
+//    let splitted = str.Split " "
+//    let rnd = System.Random()
+//    let res = splitted |> Array.sortBy (fun x -> rnd.Next(0, splitted.Length))
+//    res |> String.concat " " |> printfn "%A"
 
-let task8 (str:string) =
-    let splited = str.Split " "
-    Array.fold (fun acc x -> if (x |> String.length) % 2 = 0 then acc+1 else acc) 0 splited |> printfn "%A"
+//let task8 (str:string) =
+//    let splited = str.Split " "
+//    Array.fold (fun acc x -> if (x |> String.length) % 2 = 0 then acc+1 else acc) 0 splited |> printfn "%A"
 
-let task16 flag =
-    let cmprColots = function 
-        | "White" -> 0
-        | "Blue" -> 1
-        | "Red" -> 2
-    Array.sortBy (fun color -> cmprColots color) flag |> Array.iter (fun x -> printfn "%A" x)
+//let task16 flag =
+//    let cmprColots = function 
+//        | "White" -> 0
+//        | "Blue" -> 1
+//        | "Red" -> 2
+//    Array.sortBy (fun color -> cmprColots color) flag |> Array.iter (fun x -> printfn "%A" x)
 
-[<EntryPoint>]
-let main argv = 
-    let loremipsum3 = "A B C D E F G H I K L"
-    let loremipsum8 = "Lorem Ipsum Dolor Ligma Filo Degro Giga Cdfia"
-    let flag = [|
-        "Red";
-        "White";
-        "Blue"
-    |]
+//[<EntryPoint>]
+//let main argv = 
+//    let loremipsum3 = "A B C D E F G H I K L"
+//    let loremipsum8 = "Lorem Ipsum Dolor Ligma Filo Degro Giga Cdfia"
+//    let flag = [|
+//        "Red";
+//        "White";
+//        "Blue"
+//    |]
     
-    System.Console.WriteLine "Выберите программу 3,8,16:"
-    let task = match System.Console.ReadLine() with
-    | "3" -> task3 loremipsum3
-    | "8" -> task8 loremipsum8
-    | "16" -> task16 flag
-    | _ -> printfn "Неправильный символ"
+//    System.Console.WriteLine "Выберите программу 3,8,16:"
+//    let task = match System.Console.ReadLine() with
+//    | "3" -> task3 loremipsum3
+//    | "8" -> task8 loremipsum8
+//    | "16" -> task16 flag
+//    | _ -> printfn "Неправильный символ"
 
-    //printfn "%A" task
-    0
+//    //printfn "%A" task
+//    0
 
 (*
 Variant 3 Alexander Zhdanoff
@@ -210,50 +210,50 @@ task 3, 4
 // Внутри F# нет классических датаданных о частоте букв в алфавите, воспользуемся данными со стороннего csv файла
 // sourse — https://gist.github.com/randallmorey/dea827d6f1c48374bdea0d2f5a320a16
 
-//open FSharp.Data
+open FSharp.Data
 
-//let String2List (word:string) = Seq.toList word
+let String2List (word:string) = Seq.toList word
 
-//let getFrequencyList (word:string) = 
-//    word.Replace(" ", "").ToUpper() |> String2List |> List.countBy id
+let getFrequencyList (word:string) = 
+    word.Replace(" ", "").ToUpper() |> String2List |> List.countBy id
 
-//let solve3 verbose strings = 
-//    let indexedstr = Array.indexed strings
-//    let freqWords = strings |> Array.map getFrequencyList
+let solve3 verbose strings = 
+    let indexedstr = Array.indexed strings
+    let freqWords = strings |> Array.map getFrequencyList
     
-//    let mostFreq = Array.map (List.maxBy (fun (_, i) -> i)) freqWords
-//    let cntsLetters = Array.map (List.sumBy (fun (_, i) -> i)) freqWords
+    let mostFreq = Array.map (List.maxBy (fun (_, i) -> i)) freqWords
+    let cntsLetters = Array.map (List.sumBy (fun (_, i) -> i)) freqWords
     
-//    let divXY x y = System.Math.Round (((float)x/(float)y), 5)
+    let divXY x y = System.Math.Round (((float)x/(float)y), 5)
 
-//    let freqmostinword = Array.map2 (fun (letter, q1) q2 -> (letter, divXY q1 q2)) mostFreq cntsLetters
-//    let freqAlphabet = CsvFile.Load(__SOURCE_DIRECTORY__ + "/alphabetFreq.csv").Cache().Rows
+    let freqmostinword = Array.map2 (fun (letter, q1) q2 -> (letter, divXY q1 q2)) mostFreq cntsLetters
+    let freqAlphabet = CsvFile.Load(__SOURCE_DIRECTORY__ + "/alphabetFreq.csv").Cache().Rows
     
-//    let diffFrqncs index =
-//        let elem = freqmostinword.[index]
-//        let letter = fst elem
+    let diffFrqncs index =
+        let elem = freqmostinword.[index]
+        let letter = fst elem
 
-//        let row = freqAlphabet |> Seq.find (fun (x: CsvRow) -> (char)x.["letter"] = letter)
-//        let frq = (float)row.["frequency"]
+        let row = freqAlphabet |> Seq.find (fun (x: CsvRow) -> (char)x.["letter"] = letter)
+        let frq = (float)row.["frequency"]
 
-//        if verbose
-//        then 
-//            printf "%A " (snd elem - frq) 
-//            printfn ""
-//        snd elem - frq
+        if verbose
+        then 
+            printf "%A " (snd elem - frq) 
+            printfn ""
+        snd elem - frq
 
-//    if verbose
-//    then printfn "Rawdata \n %A" (indexedstr, "\n", freqWords, "\n", mostFreq, "\n" , cntsLetters, "\n", freqmostinword, "\n", freqAlphabet)
+    if verbose
+    then printfn "Rawdata \n %A" (indexedstr, "\n", freqWords, "\n", mostFreq, "\n" , cntsLetters, "\n", freqmostinword, "\n", freqAlphabet)
     
-//    printf "Result — "
-//    indexedstr |> Array.sortBy (fun (index, _) -> diffFrqncs index)
+    printf "Result — "
+    indexedstr |> Array.sortBy (fun (index, _) -> diffFrqncs index)
 
-//[<EntryPoint>]
-//let main argv = 
-//    let strings = [|"Sosiska v teste"; "Marmelad"; "Donada"|]
+[<EntryPoint>]
+let main argv = 
+    let strings = [|"Sosiska v teste"; "Marmelad"; "Donada"|]
 
-//    printfn "%A" (solve3 true strings)
-//    0
+    printfn "%A" (solve3 true strings)
+    0
 
 
 // task4
