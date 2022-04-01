@@ -145,16 +145,16 @@ Variant 3 Alexander Zhdanoff
 18.
 *)
 
-let solve18 arr1 arr2 = 
-    let folder = [| arr1; arr2 |]
-    Array.concat folder
+//let solve18 arr1 arr2 = 
+//    let folder = [| arr1; arr2 |]
+//    Array.concat folder
 
-[<EntryPoint>]
-let main argv = 
-    let arr1 = [| for i in 1..10 do yield i |]
-    let arr2 = [| for i in 11..20 do yield i |]
-    printfn "%A" (solve18 arr1 arr2)
-    0
+//[<EntryPoint>]
+//let main argv = 
+//    let arr1 = [| for i in 1..10 do yield i |]
+//    let arr2 = [| for i in 11..20 do yield i |]
+//    printfn "%A" (solve18 arr1 arr2)
+//    0
 
 (*
 Variant 3 Alexander Zhdanoff
@@ -162,11 +162,11 @@ Variant 3 Alexander Zhdanoff
 task 8, task 16
 *)
 
-//let task3 (str:string) =
-//    let splitted = str.Split " "
-//    let rnd = System.Random()
-//    let res = splitted |> Array.sortBy (fun x -> rnd.Next(0, splitted.Length))
-//    res |> String.concat " " |> printfn "%A"
+let task3 (str:string) =
+    let splitted = str.Split " "
+    let rnd = System.Random()
+    let res = splitted |> Array.sortBy (fun x -> rnd.Next(0, splitted.Length))
+    res |> String.concat " " |> printfn "%A"
 
 //let task8 (str:string) =
 //    let splited = str.Split " "
@@ -215,42 +215,70 @@ task 3, 4
 //let String2List (word:string) = Seq.toList word
 
 //let getFrequencyList (word:string) = 
-//    word.Replace(" ", "").ToLower() |> String2List |> List.countBy id
+//    word.Replace(" ", "").ToUpper() |> String2List |> List.countBy id
 
-//let solve3 strings = 
+//let solve3 verbose strings = 
+//    let indexedstr = Array.indexed strings
 //    let freqWords = strings |> Array.map getFrequencyList
     
 //    let mostFreq = Array.map (List.maxBy (fun (_, i) -> i)) freqWords
-//    let freqAlphabet = CsvFile.Load(__SOURCE_DIRECTORY__ + "/alphabetFreq.csv").Cache()
+//    let cntsLetters = Array.map (List.sumBy (fun (_, i) -> i)) freqWords
+    
+//    let divXY x y = System.Math.Round (((float)x/(float)y), 5)
 
-//    //let diffList = Array.map
-//    //mostFreq
-//    freqAlphabet.
+//    let freqmostinword = Array.map2 (fun (letter, q1) q2 -> (letter, divXY q1 q2)) mostFreq cntsLetters
+//    let freqAlphabet = CsvFile.Load(__SOURCE_DIRECTORY__ + "/alphabetFreq.csv").Cache().Rows
+    
+//    let diffFrqncs index =
+//        let elem = freqmostinword.[index]
+//        let letter = fst elem
 
+//        let row = freqAlphabet |> Seq.find (fun (x: CsvRow) -> (char)x.["letter"] = letter)
+//        let frq = (float)row.["frequency"]
+
+//        if verbose
+//        then 
+//            printf "%A " (snd elem - frq) 
+//            printfn ""
+//        snd elem - frq
+
+//    if verbose
+//    then printfn "Rawdata \n %A" (indexedstr, "\n", freqWords, "\n", mostFreq, "\n" , cntsLetters, "\n", freqmostinword, "\n", freqAlphabet)
+    
+//    printf "Result — "
+//    indexedstr |> Array.sortBy (fun (index, _) -> diffFrqncs index)
 
 //[<EntryPoint>]
 //let main argv = 
 //    let strings = [|"Sosiska v teste"; "Marmelad"; "Donada"|]
 
-//    printfn "%A" (solve3 strings)
+//    printfn "%A" (solve3 true strings)
 //    0
 
 
 // task4
 
-//let ASCIIcode char = System.Char.GetNumericValue char
+//let ASCIIcode (char:char) = (int)char
+
+//// TODO: replace string -> seqChars (String2Seq)
+//let mean length seqChars = (seqChars |> List.sumBy ASCIIcode) / length
+
+//let squaresub master slave = (float)((ASCIIcode slave) - master)**2.0 // variable means closure
+//// let min master = fun slave -> slave - master — same declaration
+
+//let SD length mean seqChars =
+//    (seqChars |> Seq.map (squaresub mean) |> Seq.sum) / length
 
 //let getAvrgWeightASCII (string:string)=
-//    let listed = Seq.toList string
-//    let cnts = (int >> float)listed.Length
-//    listed |> List.fold (fun acc char -> acc + ((ASCIIcode char) / cnts)) 0.0
+//    let seqChars = Seq.toList string
+//    mean string.Length seqChars
 
 //let solve4 strings =
 //    (Array.map getAvrgWeightASCII strings) |> Array.zip strings
 
 //[<EntryPoint>]
 //let main argv = 
-//    let strings = [|"Sosiska v teste"; "Marmelad"; "Donada"|]
+//    let strings = [|"Sosiska v teste"; "Marmelad"; "Donada"; "12PO"; "2321"; "Q^4"|]
     
 //    printfn "%A" (solve4 strings)
 //    0
