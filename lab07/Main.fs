@@ -109,52 +109,52 @@ Variant 3 Alexander Zhdanoff
 (a,b), таких, что существует пара (x,y): X*Y=N, НОД(X,Y)=d, a=X/d, b=Y/d
 *)
 
-let rec gcd (x, y) =
-    if y = 0 then x
-    else gcd (y, (x % y))
+//let rec gcd (x, y) =
+//    if y = 0 then x
+//    else gcd (y, (x % y))
 
-let solve17 num =
-    let divs = [
-        for i in 1..num do
-            if num % i = 0
-            then yield i
-    ]
+//let solve17 num =
+//    let divs = [
+//        for i in 1..num do
+//            if num % i = 0
+//            then yield i
+//    ]
 
-    let pairs = [
-        let n = (divs.Length / 2 - 1 + (divs.Length % 2))
-        for i in 0..n do
-            yield (divs.Item i, divs.Item (divs.Length - 1 - i))
-    ]
-    //let pairs = divs |> List.allPairs divs |> List.filter (fun (x, y) -> x*y = num)
+//    let pairs = [
+//        let n = (divs.Length / 2 - 1 + (divs.Length % 2))
+//        for i in 0..n do
+//            yield (divs.Item i, divs.Item (divs.Length - 1 - i))
+//    ]
+//    //let pairs = divs |> List.allPairs divs |> List.filter (fun (x, y) -> x*y = num)
 
-    [
-    for pair in pairs do
-        let gcd = pair |> gcd
-        yield (fst pair / gcd, snd pair / gcd)
-    ]
+//    [
+//    for pair in pairs do
+//        let gcd = pair |> gcd
+//        yield (fst pair / gcd, snd pair / gcd)
+//    ]
 
 
-[<EntryPoint>]
-let main argv = 
-    let num = 625
-    printfn "%A" (solve17 num)
-    0
+//[<EntryPoint>]
+//let main argv = 
+//    let num = 625
+//    printfn "%A" (solve17 num)
+//    0
 
 (*
 Variant 3 Alexander Zhdanoff
 18.
 *)
 
-//let solve18 arr1 arr2 = 
-//    let folder = [| arr1; arr2 |]
-//    Array.concat folder
+let solve18 arr1 arr2 = 
+    let folder = [| arr1; arr2 |]
+    Array.concat folder
 
-//[<EntryPoint>]
-//let main argv = 
-//    let arr1 = [| for i in 1..10 do yield i |]
-//    let arr2 = [| for i in 11..20 do yield i |]
-//    printfn "%A" (solve18 arr1 arr2)
-//    0
+[<EntryPoint>]
+let main argv = 
+    let arr1 = [| for i in 1..10 do yield i |]
+    let arr2 = [| for i in 11..20 do yield i |]
+    printfn "%A" (solve18 arr1 arr2)
+    0
 
 (*
 Variant 3 Alexander Zhdanoff
@@ -182,7 +182,7 @@ task 8, task 16
 //[<EntryPoint>]
 //let main argv = 
 //    let loremipsum3 = "A B C D E F G H I K L"
-//    let loremipsum8 = "Lorem Ipsum Dolor Ligma Filo Degro Giga Cdfi"
+//    let loremipsum8 = "Lorem Ipsum Dolor Ligma Filo Degro Giga Cdfia"
 //    let flag = [|
 //        "Red";
 //        "White";
@@ -202,4 +202,55 @@ task 8, task 16
 (*
 Variant 3 Alexander Zhdanoff
 20.
+task 3, 4
 *)
+
+// task3
+
+// Внутри F# нет классических датаданных о частоте букв в алфавите, воспользуемся данными со стороннего csv файла
+// sourse — https://gist.github.com/randallmorey/dea827d6f1c48374bdea0d2f5a320a16
+
+//open FSharp.Data
+
+//let String2List (word:string) = Seq.toList word
+
+//let getFrequencyList (word:string) = 
+//    word.Replace(" ", "").ToLower() |> String2List |> List.countBy id
+
+//let solve3 strings = 
+//    let freqWords = strings |> Array.map getFrequencyList
+    
+//    let mostFreq = Array.map (List.maxBy (fun (_, i) -> i)) freqWords
+//    let freqAlphabet = CsvFile.Load(__SOURCE_DIRECTORY__ + "/alphabetFreq.csv").Cache()
+
+//    //let diffList = Array.map
+//    //mostFreq
+//    freqAlphabet.
+
+
+//[<EntryPoint>]
+//let main argv = 
+//    let strings = [|"Sosiska v teste"; "Marmelad"; "Donada"|]
+
+//    printfn "%A" (solve3 strings)
+//    0
+
+
+// task4
+
+//let ASCIIcode char = System.Char.GetNumericValue char
+
+//let getAvrgWeightASCII (string:string)=
+//    let listed = Seq.toList string
+//    let cnts = (int >> float)listed.Length
+//    listed |> List.fold (fun acc char -> acc + ((ASCIIcode char) / cnts)) 0.0
+
+//let solve4 strings =
+//    (Array.map getAvrgWeightASCII strings) |> Array.zip strings
+
+//[<EntryPoint>]
+//let main argv = 
+//    let strings = [|"Sosiska v teste"; "Marmelad"; "Donada"|]
+    
+//    printfn "%A" (solve4 strings)
+//    0
