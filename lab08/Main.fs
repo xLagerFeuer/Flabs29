@@ -23,12 +23,18 @@ type DriverLicence(
         Regex(namespattern).IsMatch(surname)) 
         then ()
         else raise <| new System.ArgumentException("Wrong name, surname")
-        
+       
+
+    // TODO: разобрать типы и сделать нормальный код генератора
     static let mutable counts = 0
-    do counts <- counts + 1
-    
+    let idGenerator =
+        counts <- counts + 1
+        counts
+
     // 7
-    // TODO: оператор приведения к интерфейсу
+
+    // TODO: оператор приведения к интерфейсу, почитать как работает
+    // https://www.compositional-it.com/news-blog/custom-equality-and-comparison-in-f/
     interface IEquatable<DriverLicence> with
         member this.Equals other = other.index.Equals this.index
     interface IComparable with
@@ -49,14 +55,14 @@ type DriverLicence(
         operand1.index - operand2.index < 0
     
     
-    member this.id = counts
+    member this.id = idGenerator
     member this.series = 
         match this.id with
         | _ when this.id < pown 10 2 -> 1
         | _ when this.id < pown 10 4 -> 2
         | _ when this.id < pown 10 6 -> 3
         | _ -> 0
-    member this.index = this.id + (pown this.series 6)
+    member this.index = this.id + (this.series * (pown 10 6))
     member this.name = name
     member this.surname = surname
     member this.birthday = birthday 
@@ -74,7 +80,7 @@ type DriverLicence(
 //let timeWrapeer func = func
 
 let timeWrapper func =
-    printfn "Function — %A" System.Reflection.MethodInfo.GetCurrentMethod
+    printfn "Function"
     let stpwatch = new Stopwatch()
     stpwatch.Start()
     let startTime = stpwatch.ElapsedTicks
@@ -142,22 +148,28 @@ let main argv =
     let Test2 = DriverLicence("Ara", "BB", System.DateTime.Parse("16/02/2008 12:15:12")) // same fields, diff index
 
     // 7
-    //printfn "%A" (Test1.Equals Test1) // true
-    //printfn "%A" (Test1.Equals Test2) // false
+    printfn "%A" (Test1.Equals Test1) // true
+    printfn "%A" (Test1.Equals Test2) // false
 
-    //// 10
-    //let another = DriverLicence("geg", "gegovich", System.DateTime.Parse("16/02/2008 12:15:12"))
+    // 10
+    let another = DriverLicence("geg", "gegovich", System.DateTime.Parse("16/02/2008 12:15:12"))
     
-    //let arr = ArrayUtil([|Test1; Test2|])
-    //let lst = ListUtil([Test1; Test2])
+    let arr = ArrayUtil([|Test1; Test2|])
+    let lst = ListUtil([Test1; Test2])
 
-    //let tree :BT<DriverLicence> = (Node)(Test1, (Node)(Test2, Empty, Empty), Empty)
-    //let bt = BTS(tree)
+    // TODO: разобрать типы
+    let tree :BT<DriverLicence> = (Node)(Test1, (Node)(Test2, Empty, Empty), Empty)
+    let bt = BTS(tree)
     
-    //let set = SetUtil(Set [Test1; Test2])
+    let set = SetUtil(Set [Test1; Test2])
 
+    printfn "%A" (arr.searchDoc Test2) // true
+    printfn "%A" (arr.searchDoc another) // false
 
-    //arr.searchDoc another
+    // same
 
+    lst.searchDoc another
+    bt.searchDoc another
+    set.searchDoc another
 
     0
