@@ -255,7 +255,7 @@ let ASCIIcode (char:char) = (int)char
 // TODO: replace string -> seqChars (String2Seq)
 let mean length seqChars = (seqChars |> List.sumBy ASCIIcode) / length
 
-let squaresub master slave = (float)((ASCIIcode slave) - master)**2.0 // variable means closure
+let squaresub master slave = (float)((ASCIIcode slave) - master)**2.0 // variables name means how works closure in F#
 // let min master = fun slave -> slave - master — same declaration
 
 let SD verbose length mean seqChars =
@@ -284,6 +284,6 @@ let main argv =
 
     System.Console.WriteLine "Выберите программу 3,4:"
     if System.Console.ReadLine() = "3" 
-    then printfn "%A" (solve3 true task3)
+    then printfn "%A" (solve3 true task3) // 
     else printfn "%A" (solve4 true task4)
     0
