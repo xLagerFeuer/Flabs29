@@ -19,6 +19,10 @@
 /lab09_05/bin
 /lab09_06/obj
 /lab09_06/bin
+/lab09_07/bin
+/lab09_07/obj
+/lab09_08/obj
+/lab09_08/obj
 /lab09template/obj
 /lab09template/bin
 /lab09template/Properties
@@ -26,6 +30,7 @@
 *.config
 *.fs
 *.user
+
 
 
 
