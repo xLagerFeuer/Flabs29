@@ -1,0 +1,170 @@
+﻿
+// Wrong implementation, without string casts
+// postfix implementation
+//Exception binaryOperation = new ArithmeticException("Бинарные операции постфиксного вида выолняются только с двумя числами");
+
+//// operands
+//private double fst = 0;
+//private double snd = 0;
+
+//private double result = 0;
+//private double number = 0;
+//private int digit = 0;
+//private bool resultHasGet = false;
+
+//public Form1()
+//{
+//    InitializeComponent();
+//}
+
+//private void setnumber(double num)
+//{
+//    if (resultHasGet)
+//    {
+//        resultBox.Text = "";
+//        resultHasGet = false;
+//    }
+//    number = number + num * Math.Pow(10, digit);
+//    digit++;
+//    resultBox.Text += System.Convert.ToString(num);
+//}
+
+//private void getresult()
+//{
+//    resultHasGet = true;
+//    resultBox.Text = "=" + System.Convert.ToString(result);
+//    digit = 0; result = 0; fst = 0; snd = 0;
+//}
+
+//private void button1_Click(object sender, EventArgs e)
+//{
+//    setnumber(1.0);
+//}
+
+//private void button2_Click(object sender, EventArgs e)
+//{
+//    setnumber(2.0);
+//}
+
+//private void button3_Click(object sender, EventArgs e)
+//{
+//    setnumber(3.0);
+//}
+
+//private void button4_Click(object sender, EventArgs e)
+//{
+//    setnumber(4.0);
+//}
+
+//private void button5_Click(object sender, EventArgs e)
+//{
+//    setnumber(5.0);
+//}
+
+//private void button6_Click(object sender, EventArgs e)
+//{
+//    setnumber(6.0);
+//}
+
+//private void button7_Click(object sender, EventArgs e)
+//{
+//    setnumber(7.0);
+//}
+
+//private void button8_Click(object sender, EventArgs e)
+//{
+//    setnumber(8.0);
+//}
+
+//private void button9_Click(object sender, EventArgs e)
+//{
+//    setnumber(9.0);
+//}
+
+//private void button0_Click(object sender, EventArgs e)
+//{
+//    setnumber(0.0);
+//}
+
+//private bool operandsFormat()
+//{
+//    if (fst == 0)
+//    {
+//        fst = number;
+//        number = 0; digit = 0;
+//        return false;
+//    }
+//    else
+//    {
+//        snd = number;
+//        return true;
+//    }
+//}
+
+//private void buttonPlus_Click(object sender, EventArgs e)
+//{
+//    if (operandsFormat())
+//    {
+//        result = fst + snd;
+//        getresult();
+//    }
+//    else
+//    {
+//        throw binaryOperation;
+//    }
+//    resultBox.Text += "+";
+//}
+
+//private void buttonMinus_Click(object sender, EventArgs e)
+//{
+//    if (operandsFormat())
+//    {
+//        result = fst - snd;
+//        getresult();
+//    }
+//    else
+//    {
+//        throw binaryOperation;
+//    }
+//    resultBox.Text += "-";
+//}
+
+//private void buttonProd_Click(object sender, EventArgs e)
+//{
+//    if (operandsFormat())
+//    {
+//        result = fst * snd;
+//        getresult();
+//    }
+//    else
+//    {
+//        throw binaryOperation;
+//    }
+//    resultBox.Text += "*";
+//}
+
+//private void buttonDiv_Click(object sender, EventArgs e)
+//{
+//    if (operandsFormat())
+//    {
+//        result = fst / snd;
+//        getresult();
+//    }
+//    else
+//    {
+//        throw binaryOperation;
+//    }
+//    resultBox.Text += "*";
+//}
+
+//private void buttonSep_Click(object sender, EventArgs e)
+//{
+//    if (!operandsFormat()) // TODO: try-catch in next time
+//    {
+//        resultBox.Text += ",";
+//    }
+//    else
+//    {
+//        throw binaryOperation;
+//    }
+//}
