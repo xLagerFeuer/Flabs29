@@ -76,7 +76,6 @@ let main argv =
     (circle :> IPrintable).Print()
 
     // 2
-
     Console.WriteLine(getArea (ARectangle(5.0, 7.0)))
     Console.WriteLine(getArea (ASquare(5.0)))
     Console.WriteLine(getArea (ACircle(5.0)))
